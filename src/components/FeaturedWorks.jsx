@@ -3,8 +3,43 @@ import { useScrollReveal } from '../hooks/useScrollReveal';
 import TiltCard from './TiltCard';
 import './FeaturedWorks.css';
 
+// Individual card component with its own scroll trigger
+const ProjectCard = ({ project, index }) => {
+  const [ref, isVisible] = useScrollReveal({ threshold: 0.3 });
+  const isLeft = index % 2 === 0;
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, x: isLeft ? -60 : 60, y: 20 }}
+      animate={isVisible ? { opacity: 1, x: 0, y: 0 } : {}}
+      transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+    >
+      <TiltCard className="work-card-wrapper">
+        <a href={project.link} target="_blank" rel="noopener noreferrer" className="work-card">
+          <div className="work-image">
+            <img src={project.image} alt={project.title} />
+            <div className="work-overlay">
+              <span>View Project</span>
+            </div>
+            <div
+              className="work-glow"
+              style={{ background: project.color }}
+            />
+          </div>
+          <div className="work-info">
+            <h4>{project.title}</h4>
+            <h6>{project.category}</h6>
+          </div>
+        </a>
+      </TiltCard>
+    </motion.div>
+  );
+};
+
 const FeaturedWorks = () => {
-  const [ref, isVisible] = useScrollReveal({ threshold: 0.1 });
+  const [headerRef, headerVisible] = useScrollReveal({ threshold: 0.5 });
+  const [ctaRef, ctaVisible] = useScrollReveal({ threshold: 0.5 });
 
   const projects = [
     {
@@ -41,67 +76,28 @@ const FeaturedWorks = () => {
     },
   ];
 
-  // Cards slide in from alternating sides
-  const getCardVariants = (index) => {
-    const isLeft = index % 2 === 0;
-    return {
-      hidden: {
-        opacity: 0,
-        x: isLeft ? -60 : 60,
-        y: 20,
-      },
-      visible: {
-        opacity: 1,
-        x: 0,
-        y: 0,
-        transition: {
-          duration: 0.6,
-          ease: [0.25, 0.46, 0.45, 0.94],
-          delay: 0.15 + index * 0.12,
-        },
-      },
-    };
-  };
-
-  const headerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const titleVariants = {
-    hidden: { opacity: 0, x: -40 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] },
-    },
-  };
-
-  const descVariants = {
-    hidden: { opacity: 0, x: 40 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] },
-    },
-  };
-
   return (
-    <section className="featured-works" id="works" ref={ref}>
+    <section className="featured-works" id="works">
       <div className="container">
         <motion.div
+          ref={headerRef}
           className="works-header"
-          variants={headerVariants}
-          initial="hidden"
-          animate={isVisible ? "visible" : "hidden"}
+          initial={{ opacity: 0 }}
+          animate={headerVisible ? { opacity: 1 } : {}}
+          transition={{ duration: 0.5 }}
         >
-          <motion.h2 variants={titleVariants}>Featured Projects</motion.h2>
-          <motion.p variants={descVariants}>
+          <motion.h2
+            initial={{ opacity: 0, x: -40 }}
+            animate={headerVisible ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+          >
+            Featured Projects
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, x: 40 }}
+            animate={headerVisible ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
+          >
             A showcase of my engineering work—from embedded systems to cloud applications.
             Each project represents challenges solved and systems built with precision
             and performance in mind.
@@ -110,39 +106,16 @@ const FeaturedWorks = () => {
 
         <div className="works-grid">
           {projects.map((project, index) => (
-            <motion.div
-              key={project.id}
-              variants={getCardVariants(index)}
-              initial="hidden"
-              animate={isVisible ? "visible" : "hidden"}
-            >
-              <TiltCard className="work-card-wrapper">
-                <a href={project.link} target="_blank" rel="noopener noreferrer" className="work-card">
-                  <div className="work-image">
-                    <img src={project.image} alt={project.title} />
-                    <div className="work-overlay">
-                      <span>View Project</span>
-                    </div>
-                    <div
-                      className="work-glow"
-                      style={{ background: project.color }}
-                    />
-                  </div>
-                  <div className="work-info">
-                    <h4>{project.title}</h4>
-                    <h6>{project.category}</h6>
-                  </div>
-                </a>
-              </TiltCard>
-            </motion.div>
+            <ProjectCard key={project.id} project={project} index={index} />
           ))}
         </div>
 
         <motion.div
+          ref={ctaRef}
           className="works-cta"
           initial={{ opacity: 0, y: 30 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
+          animate={ctaVisible ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
           <a href="https://github.com/akashp3128" target="_blank" rel="noopener noreferrer" className="btn btn-outline">
             View GitHub

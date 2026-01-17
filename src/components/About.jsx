@@ -2,8 +2,51 @@ import { motion } from 'framer-motion';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import './About.css';
 
+// Individual image with its own scroll trigger
+const AboutImage = ({ src, alt, index }) => {
+  const [ref, isVisible] = useScrollReveal({ threshold: 0.4 });
+
+  const directions = [
+    { x: -40, y: 30 },  // left image: from bottom-left
+    { x: 0, y: 50 },    // middle image: from bottom
+    { x: 40, y: 30 },   // right image: from bottom-right
+  ];
+
+  return (
+    <motion.div
+      ref={ref}
+      className="about-image"
+      initial={{ opacity: 0, ...directions[index] }}
+      animate={isVisible ? { opacity: 1, x: 0, y: 0 } : {}}
+      transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
+    >
+      <img src={src} alt={alt} />
+    </motion.div>
+  );
+};
+
+// Individual highlight item with its own scroll trigger
+const HighlightItem = ({ label, value, index }) => {
+  const [ref, isVisible] = useScrollReveal({ threshold: 0.5 });
+
+  return (
+    <motion.div
+      ref={ref}
+      className="highlight-item"
+      initial={{ opacity: 0, scale: 0.9, y: 20 }}
+      animate={isVisible ? { opacity: 1, scale: 1, y: 0 } : {}}
+      transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+    >
+      <span className="highlight-value">{value}</span>
+      <span className="highlight-label">{label}</span>
+    </motion.div>
+  );
+};
+
 const About = () => {
-  const [ref, isVisible] = useScrollReveal({ threshold: 0.15 });
+  const [titleRef, titleVisible] = useScrollReveal({ threshold: 0.5 });
+  const [textRef, textVisible] = useScrollReveal({ threshold: 0.3 });
+  const [ctaRef, ctaVisible] = useScrollReveal({ threshold: 0.5 });
 
   const images = [
     { src: 'https://images.unsplash.com/photo-1569025690938-a00729c9e1f9?w=400&h=500&fit=crop', alt: 'Submarine' },
@@ -17,97 +60,60 @@ const About = () => {
     { label: 'Clearance', value: 'Secret' },
   ];
 
-  // Animation variants for staggered children
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const slideFromLeft = {
-    hidden: { opacity: 0, x: -60 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }
-    },
-  };
-
-  const slideFromBottom = {
-    hidden: { opacity: 0, y: 40 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }
-    },
-  };
-
-  const scaleIn = {
-    hidden: { opacity: 0, scale: 0.9 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }
-    },
-  };
-
-  // Different slide directions for images
-  const imageVariants = [
-    { hidden: { opacity: 0, x: -40, y: 30 }, visible: { opacity: 1, x: 0, y: 0 } },
-    { hidden: { opacity: 0, y: 50 }, visible: { opacity: 1, y: 0 } },
-    { hidden: { opacity: 0, x: 40, y: 30 }, visible: { opacity: 1, x: 0, y: 0 } },
-  ];
-
   return (
-    <section className="about" id="about" ref={ref}>
+    <section className="about" id="about">
       <div className="container">
         <div className="about-grid">
-          <motion.div
-            className="about-content"
-            variants={containerVariants}
-            initial="hidden"
-            animate={isVisible ? "visible" : "hidden"}
-          >
-            <motion.h2 variants={slideFromLeft}>Who I Am</motion.h2>
+          <div className="about-content">
+            <motion.h2
+              ref={titleRef}
+              initial={{ opacity: 0, x: -60 }}
+              animate={titleVisible ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+            >
+              Who I Am
+            </motion.h2>
 
-            <motion.div className="about-text" variants={slideFromLeft}>
-              <motion.p variants={slideFromBottom}>
+            <motion.div
+              ref={textRef}
+              className="about-text"
+              initial={{ opacity: 0, x: -40 }}
+              animate={textVisible ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+            >
+              <motion.p
+                initial={{ opacity: 0, y: 30 }}
+                animate={textVisible ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
+              >
                 I'm a curious engineer who thrives at the intersection of hardware and software.
                 With 8 years in the U.S. Navy as a Hull Maintenance Technician and a B.S. in
                 Software Engineering from Iowa State University, I bring a unique perspective
                 to every problem I tackle.
               </motion.p>
-              <motion.p variants={slideFromBottom}>
+              <motion.p
+                initial={{ opacity: 0, y: 30 }}
+                animate={textVisible ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+              >
                 When I'm not writing code, you'll find me snowboarding, playing chess, diving
                 into battle royale games, or exploring the world of finance and crypto. I believe
                 the best engineers are endlessly curious—and I never stop learning.
               </motion.p>
 
-              <motion.div
-                className="about-highlights"
-                variants={containerVariants}
-              >
+              <div className="about-highlights">
                 {highlights.map((item, index) => (
-                  <motion.div
-                    key={index}
-                    className="highlight-item"
-                    variants={scaleIn}
-                  >
-                    <span className="highlight-value">{item.value}</span>
-                    <span className="highlight-label">{item.label}</span>
-                  </motion.div>
+                  <HighlightItem key={index} {...item} index={index} />
                 ))}
-              </motion.div>
+              </div>
 
               <motion.a
+                ref={ctaRef}
                 href="#contact"
                 className="btn btn-outline"
-                variants={slideFromBottom}
+                initial={{ opacity: 0, y: 20 }}
+                animate={ctaVisible ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
               >
                 Let's Connect
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -115,31 +121,13 @@ const About = () => {
                 </svg>
               </motion.a>
             </motion.div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            className="about-images"
-            initial="hidden"
-            animate={isVisible ? "visible" : "hidden"}
-            variants={{
-              hidden: { opacity: 0 },
-              visible: {
-                opacity: 1,
-                transition: { staggerChildren: 0.2, delayChildren: 0.3 }
-              }
-            }}
-          >
+          <div className="about-images">
             {images.map((img, index) => (
-              <motion.div
-                key={index}
-                className="about-image"
-                variants={imageVariants[index]}
-                transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
-              >
-                <img src={img.src} alt={img.alt} />
-              </motion.div>
+              <AboutImage key={index} {...img} index={index} />
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
