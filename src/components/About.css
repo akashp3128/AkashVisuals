@@ -1,7 +1,7 @@
 .about {
   background: var(--bg-primary);
   position: relative;
-  min-height: 200vh; /* Extra height for scroll animations */
+  min-height: 300vh; /* Extra height for scroll animations + hold period */
 }
 
 .about > .container {
