@@ -15,9 +15,9 @@ const Hero = () => {
   const rightPanelX = useTransform(scrollYProgress, [0, 0.3], ['0%', '100%']);
 
   // Text reveal - fades in as panels slide, then fades out on continued scroll
-  const textOpacity = useTransform(scrollYProgress, [0.1, 0.25, 0.5, 0.65], [0, 1, 1, 0]);
-  const textY = useTransform(scrollYProgress, [0.1, 0.25, 0.5, 0.65], [60, 0, 0, -100]);
-  const textScale = useTransform(scrollYProgress, [0.1, 0.3, 0.5, 0.65], [0.9, 1, 1, 0.95]);
+  const textOpacity = useTransform(scrollYProgress, [0.15, 0.3, 0.5, 0.65], [0, 1, 1, 0]);
+  const textY = useTransform(scrollYProgress, [0.15, 0.3, 0.5, 0.65], [40, 0, 0, -80]);
+  const textScale = useTransform(scrollYProgress, [0.15, 0.35, 0.5, 0.65], [0.95, 1, 1, 0.95]);
 
   // Hide entire fixed layer after hero section
   const layerOpacity = useTransform(scrollYProgress, [0.6, 0.75], [1, 0]);
@@ -52,14 +52,42 @@ const Hero = () => {
             scale: textScale
           }}
         >
-          <h1>Akash Patel</h1>
+          <div className="wanted-poster">
+            <div className="wanted-header">WANTED</div>
+            <div className="wanted-photo-frame">
+              <div className="wanted-photo">
+                <img src="/headshot.png" alt="Akash Patel" />
+              </div>
+            </div>
+            <div className="wanted-info-wrapper">
+              <div className="integral-left">
+                <span className="integral-top">&#x222B;</span>
+                <span className="integral-bottom">&#x222B;</span>
+              </div>
+              <div className="wanted-info-content">
+                <div className="wanted-status">DEAD OR ALIVE</div>
+                <div className="wanted-name">AKASH·PATEL</div>
+                <div className="wanted-bounty">
+                  <span className="berry-symbol">B</span>
+                  <span className="bounty-amount">3,000,000,000-</span>
+                </div>
+              </div>
+              <div className="integral-right">
+                <span className="integral-top">&#x222B;</span>
+                <span className="integral-bottom">&#x222B;</span>
+              </div>
+            </div>
+            <div className="wanted-footer">
+              <span className="navy-text">NAVY</span>
+            </div>
+          </div>
 
           <div className="hero-subtitles">
             <h5>
               Software Engineer<br />Chicago, IL
             </h5>
             <h5>
-              Building systems from<br />silicon to software
+              Engineering at<br />every layer
             </h5>
           </div>
 

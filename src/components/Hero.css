@@ -18,6 +18,8 @@
   z-index: 1;
   will-change: opacity;
   pointer-events: none;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .hero-text-reveal {
@@ -25,36 +27,262 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
-  padding: 0 24px;
+  gap: 16px;
+  padding: 20px;
+  overflow: visible;
+  max-height: 95vh;
 }
 
-/* Starburst effect behind name */
+/* Speed lines effect behind name */
 .hero-text-reveal::before {
   content: '';
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 600px;
-  height: 600px;
+  width: 200%;
+  height: 200%;
   transform: translate(-50%, -50%);
-  background: repeating-conic-gradient(
-    from 0deg,
-    transparent 0deg 5deg,
-    rgba(0,0,0,0.03) 5deg 10deg
-  );
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 8px,
+      rgba(0,0,0,0.08) 8px,
+      rgba(0,0,0,0.08) 10px
+    );
   pointer-events: none;
   z-index: -1;
-  border-radius: 50%;
+  mask-image: radial-gradient(ellipse 60% 40% at center, transparent 30%, black 70%);
+  -webkit-mask-image: radial-gradient(ellipse 60% 40% at center, transparent 30%, black 70%);
 }
 
-.hero-text-reveal h1 {
-  color: #000;
-  text-shadow: 4px 4px 0 rgba(0,0,0,0.1);
-  -webkit-text-stroke: 2px #000;
-  paint-order: stroke fill;
-  position: relative;
+/* Additional diagonal speed lines */
+.hero-text-reveal::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 250%;
+  height: 250%;
+  transform: translate(-50%, -50%) rotate(-15deg);
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 20px,
+      rgba(0,0,0,0.04) 20px,
+      rgba(0,0,0,0.04) 22px
+    );
+  pointer-events: none;
+  z-index: -1;
+  mask-image: radial-gradient(ellipse 50% 35% at center, transparent 20%, black 80%);
+  -webkit-mask-image: radial-gradient(ellipse 50% 35% at center, transparent 20%, black 80%);
 }
+
+/* One Piece Wanted Poster - Manga Style */
+.wanted-poster {
+  background: #000;
+  padding: 5px;
+  position: relative;
+  width: 224px;
+  max-width: 90vw;
+  margin-top: 40px;
+  margin-bottom: 16px;
+  box-shadow: 5px 5px 0 rgba(0,0,0,0.8);
+  flex-shrink: 0;
+}
+
+/* Inner paper */
+.wanted-poster::before {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  background: #fff;
+  z-index: 0;
+}
+
+.wanted-header {
+  position: relative;
+  z-index: 1;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 30px;
+  font-weight: 900;
+  text-align: center;
+  color: #000;
+  letter-spacing: 2px;
+  padding: 8px 0 5px;
+}
+
+.wanted-photo-frame {
+  position: relative;
+  z-index: 1;
+  padding: 0 11px;
+}
+
+.wanted-photo {
+  width: 100%;
+  aspect-ratio: 1.1;
+  border: 3px solid #000;
+  overflow: hidden;
+  position: relative;
+  background: #fff;
+}
+
+.wanted-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 15%;
+  filter: grayscale(100%) contrast(1.2);
+}
+
+/* Halftone overlay on photo */
+.wanted-photo::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(circle, rgba(0,0,0,0.3) 1px, transparent 1px);
+  background-size: 4px 4px;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+/* Info wrapper with integral brackets */
+.wanted-info-wrapper {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  margin-top: 6px;
+  padding: 0 8px;
+}
+
+.integral-left,
+.integral-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-family: 'Times New Roman', Georgia, 'Palatino Linotype', serif;
+  font-size: 32px;
+  font-style: italic;
+  line-height: 1;
+  color: #000;
+  padding: 2px 0;
+}
+
+.integral-left .integral-top,
+.integral-left .integral-bottom,
+.integral-right .integral-top,
+.integral-right .integral-bottom {
+  display: block;
+}
+
+/* Left side - top curves right, bottom curves left (flipped vertically) */
+.integral-left .integral-top {
+  transform: scaleX(-1);
+}
+
+.integral-left .integral-bottom {
+  transform: scaleX(-1) scaleY(-1);
+}
+
+/* Right side - top curves left, bottom curves right (flipped vertically) */
+.integral-right .integral-top {
+  transform: none;
+}
+
+.integral-right .integral-bottom {
+  transform: scaleY(-1);
+}
+
+.wanted-info-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2px 4px;
+}
+
+.wanted-status {
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 10px;
+  text-align: center;
+  color: #000;
+  letter-spacing: 3px;
+  font-weight: 700;
+}
+
+.wanted-name {
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 19px;
+  font-weight: 900;
+  text-align: center;
+  color: #000;
+  letter-spacing: 1px;
+  margin-top: 1px;
+}
+
+.wanted-bounty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  margin-top: 2px;
+}
+
+.berry-symbol {
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 18px;
+  font-weight: 900;
+  color: #000;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Vertical squiggly line for berry symbol (integral style) */
+.berry-symbol::before {
+  content: '∫';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 22px;
+  font-weight: 400;
+  opacity: 0.9;
+}
+
+.bounty-amount {
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 16px;
+  font-weight: 900;
+  color: #000;
+  letter-spacing: 0px;
+}
+
+.wanted-footer {
+  position: relative;
+  z-index: 1;
+  text-align: right;
+  margin-top: 2px;
+  padding: 0 10px 6px 0;
+}
+
+.navy-text {
+  font-family: Impact, 'Arial Black', Haettenschweiler, sans-serif;
+  font-size: 16px;
+  font-weight: 900;
+  color: #000;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
 
 .hero-subtitles {
   display: flex;
@@ -224,6 +452,18 @@
   height: 100%;
   object-fit: cover;
   filter: grayscale(100%) contrast(1.1);
+}
+
+/* Left panel - contain full image */
+.hero-panel-left .panel-image img {
+  object-fit: contain;
+  object-position: center;
+  background: var(--bg-primary);
+}
+
+/* Right panel - shift to show more of the bottom (main content) */
+.hero-panel-right .panel-image img {
+  object-position: center 120%;
 }
 
 
