@@ -26,7 +26,7 @@ const Hero = () => {
   // Wanted poster - fades in big, holds, then shrinks
   const posterScale = useTransform(scrollYProgress, [0.12, 0.22, 0.32, 0.40], [0.9, 1.35, 1.35, 1]);
   const posterOpacity = useTransform(scrollYProgress, [0.12, 0.22, 0.50, 0.60], [0, 1, 1, 0]);
-  const posterY = useTransform(scrollYProgress, [0.12, 0.22, 0.32, 0.40, 0.50, 0.60], [40, 0, 0, 0, 0, -60]);
+  const posterY = useTransform(scrollYProgress, [0.12, 0.22, 0.32, 0.40, 0.50, 0.60], [60, 40, 40, 0, 0, -60]);
 
   // Other elements - fade in as poster shrinks, stay until end
   const subtitlesOpacity = useTransform(scrollYProgress, [0.34, 0.40, 0.50, 0.60], [0, 1, 1, 0]);
