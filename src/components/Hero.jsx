@@ -11,35 +11,35 @@ const Hero = () => {
   });
 
   // Timeline:
-  // 0.00 - 0.20: Panels slide away
-  // 0.15 - 0.25: Poster fades in BIG
-  // 0.25 - 0.40: Poster stays big
-  // 0.40 - 0.50: Poster shrinks, other elements fade in
-  // 0.50 - 0.65: Everything visible
-  // 0.65 - 0.80: Everything fades out together
+  // 0.00 - 0.18: Panels slide away
+  // 0.12 - 0.22: Poster fades in BIG
+  // 0.22 - 0.32: Poster stays big
+  // 0.32 - 0.40: Poster shrinks, other elements fade in
+  // 0.40 - 0.50: Everything visible
+  // 0.50 - 0.60: Everything fades out together
 
   // Panel slide transforms
-  const leftPanelX = useTransform(scrollYProgress, [0, 0.20], ['0%', '-100%']);
-  const rightPanelX = useTransform(scrollYProgress, [0, 0.20], ['0%', '100%']);
-  const panelOpacity = useTransform(scrollYProgress, [0.18, 0.25], [1, 0]);
+  const leftPanelX = useTransform(scrollYProgress, [0, 0.18], ['0%', '-100%']);
+  const rightPanelX = useTransform(scrollYProgress, [0, 0.18], ['0%', '100%']);
+  const panelOpacity = useTransform(scrollYProgress, [0.15, 0.22], [1, 0]);
 
   // Wanted poster - fades in big, holds, then shrinks
-  const posterScale = useTransform(scrollYProgress, [0.15, 0.25, 0.40, 0.50], [0.9, 1.35, 1.35, 1]);
-  const posterOpacity = useTransform(scrollYProgress, [0.15, 0.25, 0.65, 0.80], [0, 1, 1, 0]);
-  const posterY = useTransform(scrollYProgress, [0.15, 0.25, 0.40, 0.50, 0.65, 0.80], [40, 0, 0, 0, 0, -60]);
+  const posterScale = useTransform(scrollYProgress, [0.12, 0.22, 0.32, 0.40], [0.9, 1.35, 1.35, 1]);
+  const posterOpacity = useTransform(scrollYProgress, [0.12, 0.22, 0.50, 0.60], [0, 1, 1, 0]);
+  const posterY = useTransform(scrollYProgress, [0.12, 0.22, 0.32, 0.40, 0.50, 0.60], [40, 0, 0, 0, 0, -60]);
 
   // Other elements - fade in as poster shrinks, stay until end
-  const subtitlesOpacity = useTransform(scrollYProgress, [0.42, 0.50, 0.65, 0.80], [0, 1, 1, 0]);
-  const subtitlesY = useTransform(scrollYProgress, [0.42, 0.50, 0.65, 0.80], [25, 0, 0, -40]);
+  const subtitlesOpacity = useTransform(scrollYProgress, [0.34, 0.40, 0.50, 0.60], [0, 1, 1, 0]);
+  const subtitlesY = useTransform(scrollYProgress, [0.34, 0.40, 0.50, 0.60], [25, 0, 0, -40]);
 
-  const statusOpacity = useTransform(scrollYProgress, [0.46, 0.52, 0.65, 0.80], [0, 1, 1, 0]);
-  const statusY = useTransform(scrollYProgress, [0.46, 0.52, 0.65, 0.80], [25, 0, 0, -40]);
+  const statusOpacity = useTransform(scrollYProgress, [0.36, 0.42, 0.50, 0.60], [0, 1, 1, 0]);
+  const statusY = useTransform(scrollYProgress, [0.36, 0.42, 0.50, 0.60], [25, 0, 0, -40]);
 
-  const marqueeOpacity = useTransform(scrollYProgress, [0.50, 0.56, 0.65, 0.80], [0, 1, 1, 0]);
-  const marqueeY = useTransform(scrollYProgress, [0.50, 0.56, 0.65, 0.80], [25, 0, 0, -40]);
+  const marqueeOpacity = useTransform(scrollYProgress, [0.38, 0.44, 0.50, 0.60], [0, 1, 1, 0]);
+  const marqueeY = useTransform(scrollYProgress, [0.38, 0.44, 0.50, 0.60], [25, 0, 0, -40]);
 
   // Hide entire fixed layer after hero section
-  const layerOpacity = useTransform(scrollYProgress, [0.75, 0.85], [1, 0]);
+  const layerOpacity = useTransform(scrollYProgress, [0.55, 0.65], [1, 0]);
 
   // Panel images
   const leftPanelImage = '/leftpanel.jpg';
