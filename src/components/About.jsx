@@ -1,29 +1,7 @@
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import './About.css';
-
-// Individual image with its own scroll trigger
-const AboutImage = ({ src, alt, index }) => {
-  const [ref, isVisible] = useScrollReveal({ threshold: 0.4 });
-
-  const directions = [
-    { x: -40, y: 30 },  // left image: from bottom-left
-    { x: 0, y: 50 },    // middle image: from bottom
-    { x: 40, y: 30 },   // right image: from bottom-right
-  ];
-
-  return (
-    <motion.div
-      ref={ref}
-      className="about-image"
-      initial={{ opacity: 0, ...directions[index] }}
-      animate={isVisible ? { opacity: 1, x: 0, y: 0 } : {}}
-      transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
-    >
-      <img src={src} alt={alt} />
-    </motion.div>
-  );
-};
 
 // Individual highlight item with its own scroll trigger
 const HighlightItem = ({ label, value, index }) => {
@@ -44,14 +22,41 @@ const HighlightItem = ({ label, value, index }) => {
 };
 
 const About = () => {
+  const sectionRef = useRef(null);
   const [titleRef, titleVisible] = useScrollReveal({ threshold: 0.5 });
   const [textRef, textVisible] = useScrollReveal({ threshold: 0.3 });
   const [ctaRef, ctaVisible] = useScrollReveal({ threshold: 0.5 });
+
+  // Scroll progress for the entire section
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start'],
+  });
+
+  // Card dealing animations - cards slide in from right, staggered
+  // First card deals at 30-45%, second at 40-55%, third at 50-65%
+  const card1X = useTransform(scrollYProgress, [0.25, 0.40], [200, 0]);
+  const card1Rotate = useTransform(scrollYProgress, [0.25, 0.40], [15, -2]);
+  const card1Opacity = useTransform(scrollYProgress, [0.25, 0.35], [0, 1]);
+
+  const card2X = useTransform(scrollYProgress, [0.32, 0.47], [200, 0]);
+  const card2Rotate = useTransform(scrollYProgress, [0.32, 0.47], [15, 0]);
+  const card2Opacity = useTransform(scrollYProgress, [0.32, 0.42], [0, 1]);
+
+  const card3X = useTransform(scrollYProgress, [0.39, 0.54], [200, 0]);
+  const card3Rotate = useTransform(scrollYProgress, [0.39, 0.54], [15, 2]);
+  const card3Opacity = useTransform(scrollYProgress, [0.39, 0.49], [0, 1]);
 
   const images = [
     { src: 'https://images.unsplash.com/photo-1569025690938-a00729c9e1f9?w=400&h=500&fit=crop', alt: 'Submarine' },
     { src: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=500&fit=crop', alt: 'Coding' },
     { src: 'https://images.unsplash.com/photo-1483721310020-03333e577078?w=400&h=500&fit=crop', alt: 'Mountains' },
+  ];
+
+  const cardTransforms = [
+    { x: card1X, rotate: card1Rotate, opacity: card1Opacity },
+    { x: card2X, rotate: card2Rotate, opacity: card2Opacity },
+    { x: card3X, rotate: card3Rotate, opacity: card3Opacity },
   ];
 
   const highlights = [
@@ -61,7 +66,7 @@ const About = () => {
   ];
 
   return (
-    <section className="about" id="about">
+    <section className="about" id="about" ref={sectionRef}>
       <div className="container">
         <div className="about-grid">
           <div className="about-content">
@@ -125,7 +130,17 @@ const About = () => {
 
           <div className="about-images">
             {images.map((img, index) => (
-              <AboutImage key={index} {...img} index={index} />
+              <motion.div
+                key={index}
+                className="about-image"
+                style={{
+                  x: cardTransforms[index].x,
+                  rotate: cardTransforms[index].rotate,
+                  opacity: cardTransforms[index].opacity,
+                }}
+              >
+                <img src={img.src} alt={img.alt} />
+              </motion.div>
             ))}
           </div>
         </div>
