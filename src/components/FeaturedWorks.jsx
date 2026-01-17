@@ -41,30 +41,80 @@ const FeaturedWorks = () => {
     },
   ];
 
+  // Cards slide in from alternating sides
+  const getCardVariants = (index) => {
+    const isLeft = index % 2 === 0;
+    return {
+      hidden: {
+        opacity: 0,
+        x: isLeft ? -60 : 60,
+        y: 20,
+      },
+      visible: {
+        opacity: 1,
+        x: 0,
+        y: 0,
+        transition: {
+          duration: 0.6,
+          ease: [0.25, 0.46, 0.45, 0.94],
+          delay: 0.15 + index * 0.12,
+        },
+      },
+    };
+  };
+
+  const headerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const titleVariants = {
+    hidden: { opacity: 0, x: -40 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] },
+    },
+  };
+
+  const descVariants = {
+    hidden: { opacity: 0, x: 40 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] },
+    },
+  };
+
   return (
     <section className="featured-works" id="works" ref={ref}>
       <div className="container">
         <motion.div
           className="works-header"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
+          variants={headerVariants}
+          initial="hidden"
+          animate={isVisible ? "visible" : "hidden"}
         >
-          <h2>Featured Projects</h2>
-          <p>
+          <motion.h2 variants={titleVariants}>Featured Projects</motion.h2>
+          <motion.p variants={descVariants}>
             A showcase of my engineering work—from embedded systems to cloud applications.
             Each project represents challenges solved and systems built with precision
             and performance in mind.
-          </p>
+          </motion.p>
         </motion.div>
 
         <div className="works-grid">
           {projects.map((project, index) => (
             <motion.div
               key={project.id}
-              initial={{ opacity: 0, y: 50 }}
-              animate={isVisible ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.1 + index * 0.1 }}
+              variants={getCardVariants(index)}
+              initial="hidden"
+              animate={isVisible ? "visible" : "hidden"}
             >
               <TiltCard className="work-card-wrapper">
                 <a href={project.link} target="_blank" rel="noopener noreferrer" className="work-card">
@@ -90,9 +140,9 @@ const FeaturedWorks = () => {
 
         <motion.div
           className="works-cta"
-          initial={{ opacity: 0 }}
-          animate={isVisible ? { opacity: 1 } : {}}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
           <a href="https://github.com/akashp3128" target="_blank" rel="noopener noreferrer" className="btn btn-outline">
             View GitHub
