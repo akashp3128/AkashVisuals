@@ -1,16 +1,33 @@
 .about {
   background: var(--bg-primary);
   position: relative;
-  min-height: 150vh; /* Extra height for scroll animations */
+  min-height: 200vh; /* Extra height for scroll animations */
+}
+
+.about > .container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  pointer-events: none;
+}
+
+.about > .container > * {
+  pointer-events: auto;
 }
 
 .about-grid {
   display: grid;
   grid-template-columns: 1fr 1.2fr;
   gap: 60px;
-  align-items: start;
-  position: sticky;
-  top: 100px;
+  align-items: center;
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
 }
 
 .about-content {
@@ -177,9 +194,15 @@
 }
 
 @media (max-width: 1024px) {
+  .about > .container {
+    padding: 0 20px;
+    align-items: flex-start;
+    padding-top: 100px;
+  }
+
   .about-grid {
     grid-template-columns: 1fr;
-    gap: 48px;
+    gap: 32px;
   }
 
   .about-images {

@@ -5,40 +5,40 @@ import './About.css';
 const About = () => {
   const sectionRef = useRef(null);
 
-  // Scroll progress for the entire section
+  // Scroll progress - similar to Hero, tracking from section start to end
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start end', 'end start'],
+    offset: ['start start', 'end start'],
   });
 
-  // Phase 1: Text content comes in (0% - 25% scroll) and STAYS
-  const titleOpacity = useTransform(scrollYProgress, [0.05, 0.15], [0, 1]);
-  const titleX = useTransform(scrollYProgress, [0.05, 0.15], [-60, 0]);
+  // Phase 1: Text content comes in (0% - 20% scroll) and STAYS
+  const titleOpacity = useTransform(scrollYProgress, [0, 0.12], [0, 1]);
+  const titleX = useTransform(scrollYProgress, [0, 0.12], [-60, 0]);
 
-  const textOpacity = useTransform(scrollYProgress, [0.10, 0.20], [0, 1]);
-  const textX = useTransform(scrollYProgress, [0.10, 0.20], [-40, 0]);
+  const textOpacity = useTransform(scrollYProgress, [0.05, 0.17], [0, 1]);
+  const textX = useTransform(scrollYProgress, [0.05, 0.17], [-40, 0]);
 
-  const highlightsOpacity = useTransform(scrollYProgress, [0.15, 0.25], [0, 1]);
-  const highlightsY = useTransform(scrollYProgress, [0.15, 0.25], [30, 0]);
+  const highlightsOpacity = useTransform(scrollYProgress, [0.10, 0.22], [0, 1]);
+  const highlightsY = useTransform(scrollYProgress, [0.10, 0.22], [30, 0]);
 
-  const ctaOpacity = useTransform(scrollYProgress, [0.20, 0.28], [0, 1]);
-  const ctaY = useTransform(scrollYProgress, [0.20, 0.28], [20, 0]);
+  const ctaOpacity = useTransform(scrollYProgress, [0.15, 0.25], [0, 1]);
+  const ctaY = useTransform(scrollYProgress, [0.15, 0.25], [20, 0]);
 
   // Phase 2: Cards deal in one by one (each card gets its own scroll range)
-  // Card 1: 30% - 42%
-  const card1X = useTransform(scrollYProgress, [0.30, 0.42], [250, 0]);
-  const card1Rotate = useTransform(scrollYProgress, [0.30, 0.42], [20, -3]);
-  const card1Opacity = useTransform(scrollYProgress, [0.30, 0.38], [0, 1]);
+  // Card 1: 25% - 40%
+  const card1X = useTransform(scrollYProgress, [0.25, 0.40], [250, 0]);
+  const card1Rotate = useTransform(scrollYProgress, [0.25, 0.40], [20, -3]);
+  const card1Opacity = useTransform(scrollYProgress, [0.25, 0.35], [0, 1]);
 
-  // Card 2: 42% - 54%
-  const card2X = useTransform(scrollYProgress, [0.42, 0.54], [250, 0]);
-  const card2Rotate = useTransform(scrollYProgress, [0.42, 0.54], [20, 0]);
-  const card2Opacity = useTransform(scrollYProgress, [0.42, 0.50], [0, 1]);
+  // Card 2: 40% - 55%
+  const card2X = useTransform(scrollYProgress, [0.40, 0.55], [250, 0]);
+  const card2Rotate = useTransform(scrollYProgress, [0.40, 0.55], [20, 0]);
+  const card2Opacity = useTransform(scrollYProgress, [0.40, 0.50], [0, 1]);
 
-  // Card 3: 54% - 66%
-  const card3X = useTransform(scrollYProgress, [0.54, 0.66], [250, 0]);
-  const card3Rotate = useTransform(scrollYProgress, [0.54, 0.66], [20, 3]);
-  const card3Opacity = useTransform(scrollYProgress, [0.54, 0.62], [0, 1]);
+  // Card 3: 55% - 70%
+  const card3X = useTransform(scrollYProgress, [0.55, 0.70], [250, 0]);
+  const card3Rotate = useTransform(scrollYProgress, [0.55, 0.70], [20, 3]);
+  const card3Opacity = useTransform(scrollYProgress, [0.55, 0.65], [0, 1]);
 
   const images = [
     { src: 'https://images.unsplash.com/photo-1569025690938-a00729c9e1f9?w=400&h=500&fit=crop', alt: 'Submarine' },
