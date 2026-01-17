@@ -3,7 +3,7 @@ import { useScrollReveal } from '../hooks/useScrollReveal';
 import './About.css';
 
 const About = () => {
-  const [ref, isVisible] = useScrollReveal({ threshold: 0.2 });
+  const [ref, isVisible] = useScrollReveal({ threshold: 0.15 });
 
   const images = [
     { src: 'https://images.unsplash.com/photo-1569025690938-a00729c9e1f9?w=400&h=500&fit=crop', alt: 'Submarine' },
@@ -17,61 +17,129 @@ const About = () => {
     { label: 'Clearance', value: 'Secret' },
   ];
 
+  // Animation variants for staggered children
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const slideFromLeft = {
+    hidden: { opacity: 0, x: -60 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }
+    },
+  };
+
+  const slideFromBottom = {
+    hidden: { opacity: 0, y: 40 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }
+    },
+  };
+
+  const scaleIn = {
+    hidden: { opacity: 0, scale: 0.9 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }
+    },
+  };
+
+  // Different slide directions for images
+  const imageVariants = [
+    { hidden: { opacity: 0, x: -40, y: 30 }, visible: { opacity: 1, x: 0, y: 0 } },
+    { hidden: { opacity: 0, y: 50 }, visible: { opacity: 1, y: 0 } },
+    { hidden: { opacity: 0, x: 40, y: 30 }, visible: { opacity: 1, x: 0, y: 0 } },
+  ];
+
   return (
     <section className="about" id="about" ref={ref}>
       <div className="container">
         <div className="about-grid">
           <motion.div
             className="about-content"
-            initial={{ opacity: 0, x: -50 }}
-            animate={isVisible ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8 }}
+            variants={containerVariants}
+            initial="hidden"
+            animate={isVisible ? "visible" : "hidden"}
           >
-            <h2>Who I Am</h2>
-            <div className="about-text">
-              <p>
+            <motion.h2 variants={slideFromLeft}>Who I Am</motion.h2>
+
+            <motion.div className="about-text" variants={slideFromLeft}>
+              <motion.p variants={slideFromBottom}>
                 I'm a curious engineer who thrives at the intersection of hardware and software.
                 With 8 years in the U.S. Navy as a Hull Maintenance Technician and a B.S. in
                 Software Engineering from Iowa State University, I bring a unique perspective
                 to every problem I tackle.
-              </p>
-              <p>
+              </motion.p>
+              <motion.p variants={slideFromBottom}>
                 When I'm not writing code, you'll find me snowboarding, playing chess, diving
                 into battle royale games, or exploring the world of finance and crypto. I believe
                 the best engineers are endlessly curious—and I never stop learning.
-              </p>
+              </motion.p>
 
-              <div className="about-highlights">
+              <motion.div
+                className="about-highlights"
+                variants={containerVariants}
+              >
                 {highlights.map((item, index) => (
-                  <div key={index} className="highlight-item">
+                  <motion.div
+                    key={index}
+                    className="highlight-item"
+                    variants={scaleIn}
+                  >
                     <span className="highlight-value">{item.value}</span>
                     <span className="highlight-label">{item.label}</span>
-                  </div>
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
 
-              <a href="#contact" className="btn btn-outline">
+              <motion.a
+                href="#contact"
+                className="btn btn-outline"
+                variants={slideFromBottom}
+              >
                 Let's Connect
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M7 17L17 7M17 7H7M17 7V17" />
                 </svg>
-              </a>
-            </div>
+              </motion.a>
+            </motion.div>
           </motion.div>
 
-          <div className="about-images">
+          <motion.div
+            className="about-images"
+            initial="hidden"
+            animate={isVisible ? "visible" : "hidden"}
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: { staggerChildren: 0.2, delayChildren: 0.3 }
+              }
+            }}
+          >
             {images.map((img, index) => (
               <motion.div
                 key={index}
                 className="about-image"
-                initial={{ opacity: 0, y: 50 }}
-                animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.8, delay: 0.2 + index * 0.1 }}
+                variants={imageVariants[index]}
+                transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
               >
                 <img src={img.src} alt={img.alt} />
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
