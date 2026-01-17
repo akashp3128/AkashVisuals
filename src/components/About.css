@@ -1,6 +1,7 @@
 .about {
   background: var(--bg-primary);
   position: relative;
+  min-height: 150vh; /* Extra height for scroll animations */
 }
 
 .about-grid {
@@ -8,6 +9,8 @@
   grid-template-columns: 1fr 1.2fr;
   gap: 60px;
   align-items: start;
+  position: sticky;
+  top: 100px;
 }
 
 .about-content {
