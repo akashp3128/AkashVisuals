@@ -50,11 +50,11 @@ const FeaturedWorks = () => {
     },
     {
       id: 2,
-      title: 'TRADING BOT',
-      category: 'Python / Quantitative',
-      image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=450&fit=crop',
-      color: '#ff6b35',
-      link: 'https://github.com/akashp3128/Trading-Bot',
+      title: 'FADE',
+      category: 'Mobile App / Flutter',
+      image: '/fade-app.png',
+      color: '#D4AF37',
+      link: 'https://github.com/akashp3128/fade-app',
     },
     {
       id: 3,
