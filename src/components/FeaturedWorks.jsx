@@ -1,70 +1,101 @@
-import { motion } from 'framer-motion';
-import { useScrollReveal } from '../hooks/useScrollReveal';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import TiltCard from './TiltCard';
 import './FeaturedWorks.css';
 
 const FeaturedWorks = () => {
-  const [ref, isVisible] = useScrollReveal({ threshold: 0.1 });
+  const sectionRef = useRef(null);
+
+  // Use the container element for scroll tracking
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end end'], // Animate from start to end of the section
+  });
+
+  // Simplified Timeline - start visible, subtle animations on scroll
+  // Header and cards start visible, with gentle movement on scroll
+
+  // Header animations - start visible with subtle movement
+  const titleOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 1]);
+  const titleY = useTransform(scrollYProgress, [0, 0.2], [0, 0]);
+  const descOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 1]);
+  const descY = useTransform(scrollYProgress, [0, 0.2], [0, 0]);
+
+  // Card animations - start visible with subtle scale/movement
+  const card1Opacity = useTransform(scrollYProgress, [0, 0.05], [1, 1]);
+  const card2Opacity = useTransform(scrollYProgress, [0, 0.1], [1, 1]);
+  const card3Opacity = useTransform(scrollYProgress, [0, 0.15], [1, 1]);
+  const card4Opacity = useTransform(scrollYProgress, [0, 0.2], [1, 1]);
+
+  // CTA animation - start visible
+  const ctaOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 1]);
+  const ctaY = useTransform(scrollYProgress, [0, 0.2], [0, 0]);
+
+  const card1Y = useTransform(scrollYProgress, [0, 0.3], [0, -10]);
+  const card2Y = useTransform(scrollYProgress, [0, 0.3], [0, -10]);
+  const card3Y = useTransform(scrollYProgress, [0, 0.3], [0, -10]);
+  const card4Y = useTransform(scrollYProgress, [0, 0.3], [0, -10]);
+
+  const cardOpacities = [card1Opacity, card2Opacity, card3Opacity, card4Opacity];
+  const cardYs = [card1Y, card2Y, card3Y, card4Y];
 
   const projects = [
     {
       id: 1,
-      title: 'LICHESS ANALYZER',
-      category: 'Full-Stack SaaS',
-      image: 'https://images.unsplash.com/photo-1529699211952-734e80c4d42b?w=600&h=700&fit=crop',
-      color: '#4ecdc4',
-      link: 'https://github.com/akashp3128/lichess-analyzer',
+      title: 'RAYCASTING ENGINE',
+      category: 'Graphics / C++',
+      image: '/raycasting-engine.png',
+      color: '#8B0000',
+      link: 'https://github.com/akashp3128/Raycasting-engine',
     },
     {
       id: 2,
-      title: 'TRADING BOT',
-      category: 'Python / Quantitative',
-      image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=700&fit=crop',
-      color: '#ff6b35',
-      link: 'https://github.com/akashp3128/Trading-Bot',
+      title: 'FADE',
+      category: 'Mobile App / Flutter',
+      image: '/fade-landing.png',
+      color: '#D4AF37',
+      link: 'https://github.com/akashp3128/fade-app',
     },
     {
       id: 3,
-      title: 'ESP32 FIRMWARE',
-      category: 'Embedded Systems',
-      image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=700&fit=crop',
-      color: '#c9b1ff',
-      link: 'https://github.com/akashp3128/esp32-project',
+      title: 'SPACEX BEAM PLANNER',
+      category: 'Algorithms / C++',
+      image: '/spacex-beam.png',
+      color: '#00ff00',
+      link: 'https://github.com/akashp3128/SpaceX-Beam-Planner',
     },
     {
       id: 4,
-      title: 'MEMORY ALLOCATOR',
-      category: 'Systems Programming',
-      image: 'https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=600&h=700&fit=crop',
-      color: '#45b7d1',
-      link: 'https://github.com/akashp3128/Memory-Allocator',
+      title: 'EJPRINT4U',
+      category: 'Freelance / Next.js',
+      image: '/ejprint4u.png',
+      color: '#E63946',
+      link: 'https://ejprint4u.com',
     },
   ];
 
   return (
-    <section className="featured-works" id="works" ref={ref}>
+    <section className="featured-works" id="works" ref={sectionRef}>
       <div className="container">
-        <motion.div
-          className="works-header"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-        >
-          <h2>Featured Projects</h2>
-          <p>
+        <div className="works-header">
+          <motion.h2 style={{ opacity: titleOpacity, y: titleY }}>
+            Featured Projects
+          </motion.h2>
+          <motion.p style={{ opacity: descOpacity, y: descY }}>
             A showcase of my engineering work—from embedded systems to cloud applications.
             Each project represents challenges solved and systems built with precision
             and performance in mind.
-          </p>
-        </motion.div>
+          </motion.p>
+        </div>
 
         <div className="works-grid">
           {projects.map((project, index) => (
             <motion.div
               key={project.id}
-              initial={{ opacity: 0, y: 50 }}
-              animate={isVisible ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.1 + index * 0.1 }}
+              style={{
+                opacity: cardOpacities[index],
+                y: cardYs[index],
+              }}
             >
               <TiltCard className="work-card-wrapper">
                 <a href={project.link} target="_blank" rel="noopener noreferrer" className="work-card">
@@ -90,9 +121,7 @@ const FeaturedWorks = () => {
 
         <motion.div
           className="works-cta"
-          initial={{ opacity: 0 }}
-          animate={isVisible ? { opacity: 1 } : {}}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          style={{ opacity: ctaOpacity, y: ctaY }}
         >
           <a href="https://github.com/akashp3128" target="_blank" rel="noopener noreferrer" className="btn btn-outline">
             View GitHub

@@ -1,15 +1,51 @@
-import { motion } from 'framer-motion';
-import { useScrollReveal } from '../hooks/useScrollReveal';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import './About.css';
 
 const About = () => {
-  const [ref, isVisible] = useScrollReveal({ threshold: 0.2 });
+  const sectionRef = useRef(null);
 
+  // Scroll progress - similar to Hero, tracking from section start to end
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end start'],
+  });
+
+  // Content starts visible - no scroll-triggered animations needed
+  // All elements visible by default for better UX on anchor navigation
+
+  // Text content - always visible
+  const titleOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 1]);
+  const titleX = useTransform(scrollYProgress, [0, 0.1], [0, 0]);
+
+  const textOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 1]);
+  const textX = useTransform(scrollYProgress, [0, 0.1], [0, 0]);
+
+  const highlightsOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 1]);
+  const highlightsY = useTransform(scrollYProgress, [0, 0.1], [0, 0]);
+
+  const ctaOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 1]);
+  const ctaY = useTransform(scrollYProgress, [0, 0.1], [0, 0]);
+
+  // Cards - always visible with slight rotation for visual interest
+  const card1Rotate = useTransform(scrollYProgress, [0, 0.1], [-3, -3]);
+  const card2Rotate = useTransform(scrollYProgress, [0, 0.1], [2, 2]);
+  const card3Rotate = useTransform(scrollYProgress, [0, 0.1], [-2, -2]);
+  const card4Rotate = useTransform(scrollYProgress, [0, 0.1], [3, 3]);
+  const card5Rotate = useTransform(scrollYProgress, [0, 0.1], [-1, -1]);
+  const card6Rotate = useTransform(scrollYProgress, [0, 0.1], [2, 2]);
+
+  // Your personal photos
   const images = [
-    { src: 'https://images.unsplash.com/photo-1569025690938-a00729c9e1f9?w=400&h=500&fit=crop', alt: 'Submarine' },
-    { src: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=500&fit=crop', alt: 'Coding' },
-    { src: 'https://images.unsplash.com/photo-1483721310020-03333e577078?w=400&h=500&fit=crop', alt: 'Mountains' },
+    { src: '/about-navy.jpg', alt: 'Navy Service' },
+    { src: '/about-iowa-state.jpg', alt: 'Iowa State University' },
+    { src: '/about-chiefs.jpg', alt: 'Chiefs Fan' },
+    { src: '/about-gymnastics.jpg', alt: 'Gymnastics' },
+    { src: '/about-welding.png', alt: 'Welding' },
+    { src: '/about-photo6.jpg', alt: 'Personal' },
   ];
+
+  const cardRotations = [card1Rotate, card2Rotate, card3Rotate, card4Rotate, card5Rotate, card6Rotate];
 
   const highlights = [
     { label: 'Navy Veteran', value: '8 Years' },
@@ -18,17 +54,26 @@ const About = () => {
   ];
 
   return (
-    <section className="about" id="about" ref={ref}>
+    <section className="about" id="about" ref={sectionRef}>
       <div className="container">
         <div className="about-grid">
-          <motion.div
-            className="about-content"
-            initial={{ opacity: 0, x: -50 }}
-            animate={isVisible ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8 }}
-          >
-            <h2>Who I Am</h2>
-            <div className="about-text">
+          <div className="about-content">
+            <motion.h2
+              style={{
+                opacity: titleOpacity,
+                x: titleX,
+              }}
+            >
+              Who I Am
+            </motion.h2>
+
+            <motion.div
+              className="about-text"
+              style={{
+                opacity: textOpacity,
+                x: textX,
+              }}
+            >
               <p>
                 I'm a curious engineer who thrives at the intersection of hardware and software.
                 With 8 years in the U.S. Navy as a Hull Maintenance Technician and a B.S. in
@@ -41,32 +86,45 @@ const About = () => {
                 the best engineers are endlessly curious—and I never stop learning.
               </p>
 
-              <div className="about-highlights">
+              <motion.div
+                className="about-highlights"
+                style={{
+                  opacity: highlightsOpacity,
+                  y: highlightsY,
+                }}
+              >
                 {highlights.map((item, index) => (
                   <div key={index} className="highlight-item">
                     <span className="highlight-value">{item.value}</span>
                     <span className="highlight-label">{item.label}</span>
                   </div>
                 ))}
-              </div>
+              </motion.div>
 
-              <a href="#contact" className="btn btn-outline">
+              <motion.a
+                href="#contact"
+                className="btn btn-outline"
+                style={{
+                  opacity: ctaOpacity,
+                  y: ctaY,
+                }}
+              >
                 Let's Connect
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M7 17L17 7M17 7H7M17 7V17" />
                 </svg>
-              </a>
-            </div>
-          </motion.div>
+              </motion.a>
+            </motion.div>
+          </div>
 
           <div className="about-images">
             {images.map((img, index) => (
               <motion.div
                 key={index}
                 className="about-image"
-                initial={{ opacity: 0, y: 50 }}
-                animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.8, delay: 0.2 + index * 0.1 }}
+                style={{
+                  rotate: cardRotations[index],
+                }}
               >
                 <img src={img.src} alt={img.alt} />
               </motion.div>
