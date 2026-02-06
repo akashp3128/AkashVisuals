@@ -12,8 +12,7 @@ const Footer = () => {
     ],
     socials: [
       { name: 'GitHub', href: 'https://github.com/akashp3128' },
-      { name: 'LinkedIn', href: 'https://linkedin.com/in/akashp3128' },
-      { name: 'Twitter', href: 'https://x.com/akashp3128' },
+      { name: 'LinkedIn', href: 'https://www.linkedin.com/in/akashpatel3128' },
     ],
   };
 
