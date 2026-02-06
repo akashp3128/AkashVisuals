@@ -14,9 +14,9 @@
 
 .navy-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1.2fr;
   gap: 60px;
-  align-items: start;
+  align-items: center;
   width: 100%;
   max-width: var(--max-width);
   margin: 0 auto;
@@ -69,6 +69,8 @@
   font-size: 16px;
   line-height: 1.8;
   color: var(--text-secondary);
+  text-transform: none;
+  font-family: var(--font-primary);
 }
 
 /* Role Cards */
@@ -119,6 +121,8 @@
   line-height: 1.6;
   color: var(--text-secondary);
   margin-bottom: 12px;
+  text-transform: none;
+  font-family: var(--font-primary);
 }
 
 .role-skills {
@@ -142,6 +146,13 @@
   font-size: 12px;
   color: var(--text-secondary);
   font-family: var(--font-mono);
+  text-transform: none;
+}
+
+/* View Evaluations Button */
+.navy-text .btn {
+  width: fit-content;
+  margin-top: 8px;
 }
 
 .role-vessels strong {
@@ -243,8 +254,8 @@
 .navy-evals {
   width: 100%;
   max-width: var(--max-width);
-  margin: 80px auto 0;
-  padding-top: 60px;
+  margin: 60px auto 0;
+  padding-top: 48px;
   border-top: 3px solid #000;
 }
 
