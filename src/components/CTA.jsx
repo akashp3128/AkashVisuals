@@ -28,7 +28,7 @@ const CTA = () => {
             <h2>Let's build</h2>
             <h2>something great</h2>
           </div>
-          <a href="mailto:hello@akashpatel.dev" className="btn btn-primary cta-btn">
+          <a href="mailto:akashp3128@gmail.com" className="btn btn-primary cta-btn">
             Get in Touch
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M7 17L17 7M17 7H7M17 7V17" />
