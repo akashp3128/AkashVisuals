@@ -33,11 +33,69 @@ const NavyService = () => {
   const cardRotations = [card1Rotate, card2Rotate, card3Rotate, card4Rotate];
 
   const evalImages = [
-    { src: '/navy-evals/eval-1.jpg', alt: 'Navy Evaluation 2017', caption: 'Performance Evaluation - Early Promote Recommendation' },
-    { src: '/navy-evals/eval-2.jpg', alt: 'Navy Evaluation', caption: 'Performance Evaluation - Technical Excellence' },
-    { src: '/navy-evals/eval-3.jpg', alt: 'Navy Evaluation', caption: 'Performance Evaluation - Leadership Recognition' },
-    { src: '/navy-evals/eval-4.jpg', alt: 'Navy Evaluation', caption: 'Performance Evaluation - Mission Impact' },
-    { src: '/navy-evals/eval-5.jpg', alt: 'Navy Evaluation NDT', caption: 'NDT Inspector Evaluation - Puget Sound Naval Shipyard' },
+    {
+      src: '/navy-evals/eval-1.jpg',
+      alt: 'Navy Evaluation 2017',
+      caption: 'Performance Evaluation - Early Promote Recommendation',
+      period: 'OCT 2016 - SEP 2017',
+      rank: 'HT3',
+      recommendation: 'Early Promote',
+      command: 'USS Michigan (SSGN-727)'
+    },
+    {
+      src: '/navy-evals/eval-2.jpg',
+      alt: 'Navy Evaluation 2018',
+      caption: 'Performance Evaluation - Technical Excellence',
+      period: 'OCT 2017 - SEP 2018',
+      rank: 'HT2',
+      recommendation: 'Early Promote',
+      command: 'USS Michigan (SSGN-727)'
+    },
+    {
+      src: '/navy-evals/eval-3.jpg',
+      alt: 'Navy Evaluation 2019',
+      caption: 'Performance Evaluation - Leadership Recognition',
+      period: 'OCT 2018 - SEP 2019',
+      rank: 'HT2',
+      recommendation: 'Must Promote',
+      command: 'USS Washington'
+    },
+    {
+      src: '/navy-evals/eval-4.jpg',
+      alt: 'Navy Evaluation 2020',
+      caption: 'Performance Evaluation - Mission Impact',
+      period: 'OCT 2019 - SEP 2020',
+      rank: 'HT2/NDT',
+      recommendation: 'Early Promote',
+      command: 'PSNS Code 135'
+    },
+    {
+      src: '/navy-evals/eval-5.jpg',
+      alt: 'Navy Evaluation NDT 2021',
+      caption: 'NDT Inspector Evaluation - Puget Sound Naval Shipyard',
+      period: 'OCT 2020 - SEP 2021',
+      rank: 'HT2/NDT',
+      recommendation: 'Must Promote',
+      command: 'PSNS Code 135'
+    },
+  ];
+
+  const evalQuotes = [
+    {
+      quote: "A NATURAL, PROVEN LEADER! Led PRTs for 150 Sailors and established a running group for 35 more—resulting in a 98% passage rate.",
+      source: "Commanding Officer",
+      year: "2020"
+    },
+    {
+      quote: "Meticulous in performing quality inspections. Work conducted was critical to keeping projects on schedule and identifying flaws to be remedied.",
+      source: "NDT Lab Supervisor, PSNS",
+      year: "2021"
+    },
+    {
+      quote: "Remarkable work ethic and is ready NOW for advancement. He has my STRONGEST recommendation for advancement.",
+      source: "Division Chief, USS Michigan",
+      year: "2017"
+    }
   ];
 
   const roles = [
@@ -156,19 +214,21 @@ const NavyService = () => {
             Click any evaluation to view full size.
           </p>
 
-          <div className="eval-highlights">
-            <div className="eval-highlight">
-              <span className="highlight-icon">★</span>
-              <span>"Early Promote" Recommendations</span>
-            </div>
-            <div className="eval-highlight">
-              <span className="highlight-icon">★</span>
-              <span>"STRONGEST recommendation for advancement"</span>
-            </div>
-            <div className="eval-highlight">
-              <span className="highlight-icon">★</span>
-              <span>Zero Safety Discrepancies</span>
-            </div>
+          {/* Quotes Section */}
+          <div className="eval-quotes">
+            {evalQuotes.map((quote, index) => (
+              <motion.blockquote
+                key={index}
+                className="eval-quote"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <p>"{quote.quote}"</p>
+                <cite>— {quote.source}, {quote.year}</cite>
+              </motion.blockquote>
+            ))}
           </div>
 
           <div className="evals-grid">
@@ -177,9 +237,19 @@ const NavyService = () => {
                 key={index}
                 className="eval-card"
                 onClick={() => openLightbox(index)}
-                whileHover={{ scale: 1.02 }}
+                whileHover={{ y: -4 }}
                 whileTap={{ scale: 0.98 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05 }}
               >
+                <div className="eval-card-header">
+                  <span className={`eval-badge ${eval_.recommendation === 'Early Promote' ? 'badge-early' : 'badge-must'}`}>
+                    {eval_.recommendation}
+                  </span>
+                  <span className="eval-rank">{eval_.rank}</span>
+                </div>
                 <div className="eval-image-wrapper">
                   <img src={eval_.src} alt={eval_.alt} />
                   <div className="eval-overlay">
@@ -190,6 +260,10 @@ const NavyService = () => {
                     </svg>
                     <span>View Full Size</span>
                   </div>
+                </div>
+                <div className="eval-card-footer">
+                  <span className="eval-period">{eval_.period}</span>
+                  <span className="eval-command">{eval_.command}</span>
                 </div>
               </motion.div>
             ))}
