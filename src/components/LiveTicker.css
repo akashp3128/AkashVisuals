@@ -19,7 +19,7 @@
     transform: translateX(0%);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translateX(-33.333%);
   }
 }
 
@@ -54,16 +54,17 @@
   font-size: 11px;
   padding: 3px 8px;
   font-family: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+  border-radius: 3px;
 }
 
 .ticker-change.positive {
-  color: #16a34a;
-  background: rgba(22, 163, 74, 0.15);
+  color: #fff;
+  background: #16a34a;
 }
 
 .ticker-change.negative {
-  color: #dc2626;
-  background: rgba(220, 38, 38, 0.15);
+  color: #fff;
+  background: #dc2626;
 }
 
 /* Pause animation on hover */

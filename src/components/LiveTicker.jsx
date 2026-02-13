@@ -109,8 +109,8 @@ const LiveTicker = () => {
 
   const tickerOrder = ['GME', 'SPY', 'BTC', 'ETH', 'TSLA', 'DOW'];
 
-  // Double the items for seamless loop
-  const tickerItems = [...tickerOrder, ...tickerOrder];
+  // Triple the items for seamless loop
+  const tickerItems = [...tickerOrder, ...tickerOrder, ...tickerOrder];
 
   return (
     <div className="live-ticker">
