@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import Marquee from './Marquee';
+import LiveTicker from './LiveTicker';
 import './Hero.css';
 
 const Hero = () => {
@@ -45,15 +45,6 @@ const Hero = () => {
   const leftPanelImage = '/leftpanel.jpg';
   const rightPanelImage = '/rightpanel.jpg';
 
-  // Skills/technologies
-  const techStack = [
-    { type: 'text', text: 'C++' },
-    { type: 'text', text: 'PYTHON' },
-    { type: 'text', text: 'EMBEDDED' },
-    { type: 'text', text: 'LINUX' },
-    { type: 'text', text: 'REACT' },
-    { type: 'text', text: 'AI/ML' },
-  ];
 
   return (
     <section className="hero" ref={containerRef}>
@@ -110,7 +101,7 @@ const Hero = () => {
               y: marqueeY,
             }}
           >
-            <Marquee items={techStack} speed={25} />
+            <LiveTicker />
           </motion.div>
         </div>
       </motion.div>
