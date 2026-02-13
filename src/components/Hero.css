@@ -20,11 +20,22 @@
   pointer-events: none;
   padding: 20px;
   box-sizing: border-box;
+}
+
+/* Grayscale background as pseudo-element so content keeps colors */
+.hero-content-layer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background-image: url('/wantedposters.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   filter: grayscale(100%);
+  z-index: -2;
 }
 
 /* Light overlay to ensure content readability */
