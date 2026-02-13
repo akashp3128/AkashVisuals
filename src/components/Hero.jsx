@@ -69,33 +69,7 @@ const Hero = () => {
               y: posterY,
             }}
           >
-            <div className="wanted-header">WANTED</div>
-            <div className="wanted-photo-frame">
-              <div className="wanted-photo">
-                <img src="/headshot.png" alt="Akash Patel" />
-              </div>
-            </div>
-            <div className="wanted-info-wrapper">
-              <div className="integral-left">
-                <span className="integral-top">&#x222B;</span>
-                <span className="integral-bottom">&#x222B;</span>
-              </div>
-              <div className="wanted-info-content">
-                <div className="wanted-status">DEAD OR ALIVE</div>
-                <div className="wanted-name">AKASH·PATEL</div>
-                <div className="wanted-bounty">
-                  <span className="berry-symbol">B</span>
-                  <span className="bounty-amount">3,000,000,000-</span>
-                </div>
-              </div>
-              <div className="integral-right">
-                <span className="integral-top">&#x222B;</span>
-                <span className="integral-bottom">&#x222B;</span>
-              </div>
-            </div>
-            <div className="wanted-footer">
-              <span className="navy-text">NAVY</span>
-            </div>
+            <img src="/wanted-poster.png" alt="Akash Patel - Wanted Poster" />
           </motion.div>
 
           {/* Subtitles - fade in after poster shrinks */}
@@ -110,7 +84,7 @@ const Hero = () => {
               Software Engineer<br />Chicago, IL
             </h5>
             <h5>
-              Engineering at<br />every layer
+              Navy veteran<br />security clearance
             </h5>
           </motion.div>
 
