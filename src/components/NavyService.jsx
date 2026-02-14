@@ -104,7 +104,7 @@ const NavyService = () => {
     {
       title: 'Hull Maintenance Technician (HT)',
       period: '2013 - 2019',
-      description: 'Specialized in welding, metal fabrication, and damage control aboard Subamrine Tenders and nuclear submarines.',
+      description: 'Specialized in welding, metal fabrication, and damage control aboard Submarine Tenders and nuclear submarines.',
       skills: ['Welding & Fabrication', 'Damage Control', 'Shipboard Preservation'],
       vessels: ['USS Michigan (SSGN-727)', 'USS Washington', 'USS Frank Cable', 'USS Emory S. Land'],
     },
