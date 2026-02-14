@@ -38,16 +38,16 @@ const NavyService = () => {
       alt: 'Navy Evaluation 2017',
       caption: 'Performance Evaluation - Early Promote Recommendation',
       period: 'OCT 2016 - SEP 2017',
-      rank: 'HT3',
+      rank: 'HTFN',
       recommendation: 'Early Promote',
       command: 'USS Michigan (SSGN-727)'
     },
     {
-      src: '/navy-evals/eval-2.jpg',
+      src: '/navy-evals/eval-4.jpg',
       alt: 'Navy Evaluation 2018',
       caption: 'Performance Evaluation - Technical Excellence',
       period: 'OCT 2017 - SEP 2018',
-      rank: 'HT2',
+      rank: 'HT3',
       recommendation: 'Early Promote',
       command: 'USS Michigan (SSGN-727)'
     },
@@ -61,11 +61,11 @@ const NavyService = () => {
       command: 'USS Washington'
     },
     {
-      src: '/navy-evals/eval-4.jpg',
+      src: '/navy-evals/eval-2.jpg',
       alt: 'Navy Evaluation 2020',
       caption: 'Performance Evaluation - Mission Impact',
       period: 'OCT 2019 - SEP 2020',
-      rank: 'HT2/NDT',
+      rank: 'HT2',
       recommendation: 'Early Promote',
       command: 'USS Frank Cable'
     },
