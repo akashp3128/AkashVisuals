@@ -18,16 +18,38 @@ const ContactForm = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  // Web3Forms - sends emails to akashp3128@gmail.com
+  const WEB3FORMS_ACCESS_KEY = '5b7e9a91-bc2e-4a22-bffe-215b28c596b4';
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('sending');
 
-    // Simulate form submission - replace with actual API call
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      setStatus('success');
-      setFormData({ name: '', email: '', subject: '', message: '' });
-      setTimeout(() => setStatus('idle'), 3000);
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject || 'New Contact Form Submission',
+          message: formData.message,
+          from_name: 'Personal Site Contact'
+        })
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        setStatus('success');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+        setTimeout(() => setStatus('idle'), 3000);
+      } else {
+        throw new Error('Form submission failed');
+      }
     } catch (error) {
       setStatus('error');
       setTimeout(() => setStatus('idle'), 3000);
