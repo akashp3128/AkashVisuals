@@ -2,7 +2,7 @@
   background: var(--bg-primary);
   position: relative;
   min-height: auto;
-  padding: 80px 0;
+  padding: 60px 0;
 }
 
 .navy-service > .container {
@@ -14,8 +14,8 @@
 
 .navy-grid {
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 60px;
+  grid-template-columns: 1fr auto;
+  gap: 40px;
   align-items: center;
   width: 100%;
   max-width: var(--max-width);
@@ -47,10 +47,10 @@
 .navy-text {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  padding: 24px;
+  gap: 16px;
+  padding: 20px;
   border: 3px solid #000;
-  box-shadow: 6px 6px 0 #000;
+  box-shadow: 4px 4px 0 #000;
   background: var(--bg-primary);
   position: relative;
 }
@@ -77,34 +77,33 @@
 .navy-roles {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 12px;
 }
 
 .role-card {
-  padding: 20px;
+  padding: 14px 16px;
   border: 2px solid #000;
-  box-shadow: 4px 4px 0 #000;
+  box-shadow: 3px 3px 0 #000;
   background: var(--bg-secondary);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .role-card:hover {
   transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0 #000;
+  box-shadow: 5px 5px 0 #000;
 }
 
 .role-header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  gap: 12px;
-  margin-bottom: 12px;
-  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
 }
 
 .role-card h4 {
   font-family: var(--font-display);
-  font-size: 18px;
+  font-size: 16px;
   letter-spacing: 1px;
   margin: 0;
 }
@@ -117,10 +116,10 @@
 }
 
 .role-card p {
-  font-size: 14px;
-  line-height: 1.6;
+  font-size: 13px;
+  line-height: 1.5;
   color: var(--text-secondary);
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   text-transform: none;
   font-family: var(--font-primary);
 }
@@ -128,22 +127,22 @@
 .role-skills {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 12px;
+  gap: 6px;
+  margin-bottom: 8px;
 }
 
 .skill-tag {
-  padding: 4px 10px;
+  padding: 3px 8px;
   background: #000;
   color: #fff;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
 }
 
 .role-vessels {
-  font-size: 12px;
+  font-size: 11px;
   color: var(--text-secondary);
   font-family: var(--font-mono);
   text-transform: none;
@@ -197,31 +196,46 @@
   font-weight: 600;
 }
 
-/* Navy Images */
+/* Navy Images - Clean 2x2 grid */
 .navy-images {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 220px);
+  grid-template-rows: repeat(2, 220px);
   gap: 12px;
-  overflow: visible;
-  position: relative;
+  justify-content: start;
 }
 
 .navy-image {
   overflow: hidden;
-  aspect-ratio: 1;
   border: 3px solid #000;
   box-shadow: 4px 4px 0 #000;
   position: relative;
-  will-change: transform;
-  transform-origin: center center;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+
+.navy-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  filter: grayscale(100%) contrast(1.1);
+  transition: filter 0.3s ease;
+}
+
+/* Position each image to show the important part */
+.navy-image:nth-child(1) img { object-position: center 40%; }
+.navy-image:nth-child(2) img { object-position: center 15%; }
+.navy-image:nth-child(3) img { object-position: center 60%; }
+.navy-image:nth-child(4) img { object-position: center 40%; }
 
 .navy-image:hover {
   transform: translate(-2px, -2px);
   box-shadow: 6px 6px 0 #000;
   z-index: 10;
+}
+
+.navy-image:hover img {
+  filter: grayscale(0%) contrast(1);
 }
 
 .navy-image::after {
@@ -498,7 +512,9 @@
 
   .navy-images {
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 12px;
+    padding: 10px 5px;
   }
 
   .navy-image {

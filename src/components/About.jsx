@@ -27,21 +27,21 @@ const About = () => {
   const ctaOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 1]);
   const ctaY = useTransform(scrollYProgress, [0, 0.1], [0, 0]);
 
-  // Cards - always visible with slight rotation for visual interest
-  const card1Rotate = useTransform(scrollYProgress, [0, 0.1], [-3, -3]);
-  const card2Rotate = useTransform(scrollYProgress, [0, 0.1], [2, 2]);
-  const card3Rotate = useTransform(scrollYProgress, [0, 0.1], [-2, -2]);
-  const card4Rotate = useTransform(scrollYProgress, [0, 0.1], [3, 3]);
+  // Cards - always visible with slight rotation for visual interest (subtle to prevent clipping)
+  const card1Rotate = useTransform(scrollYProgress, [0, 0.1], [-2, -2]);
+  const card2Rotate = useTransform(scrollYProgress, [0, 0.1], [1.5, 1.5]);
+  const card3Rotate = useTransform(scrollYProgress, [0, 0.1], [-1.5, -1.5]);
+  const card4Rotate = useTransform(scrollYProgress, [0, 0.1], [2, 2]);
   const card5Rotate = useTransform(scrollYProgress, [0, 0.1], [-1, -1]);
-  const card6Rotate = useTransform(scrollYProgress, [0, 0.1], [2, 2]);
+  const card6Rotate = useTransform(scrollYProgress, [0, 0.1], [1.5, 1.5]);
 
   // Your personal photos
   const images = [
-    { src: '/about-navy.jpg', alt: 'Navy Service' },
+    { src: '/about-gym.jpg', alt: 'Fitness' },
     { src: '/about-iowa-state.jpg', alt: 'Iowa State University' },
     { src: '/about-chiefs.jpg', alt: 'Chiefs Fan' },
     { src: '/about-gymnastics.jpg', alt: 'Gymnastics' },
-    { src: '/about-welding.png', alt: 'Welding' },
+    { src: '/about-esp.jpg', alt: 'ESP32 Project' },
     { src: '/about-photo6.jpg', alt: 'Personal' },
   ];
 

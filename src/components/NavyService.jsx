@@ -17,15 +17,15 @@ const NavyService = () => {
   const titleOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 1]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 1]);
 
-  // Card rotations for visual interest
-  const card1Rotate = useTransform(scrollYProgress, [0, 0.1], [-2, -2]);
-  const card2Rotate = useTransform(scrollYProgress, [0, 0.1], [3, 3]);
-  const card3Rotate = useTransform(scrollYProgress, [0, 0.1], [-3, -3]);
-  const card4Rotate = useTransform(scrollYProgress, [0, 0.1], [2, 2]);
+  // Card rotations for visual interest (subtle to prevent clipping)
+  const card1Rotate = useTransform(scrollYProgress, [0, 0.1], [-1.5, -1.5]);
+  const card2Rotate = useTransform(scrollYProgress, [0, 0.1], [2, 2]);
+  const card3Rotate = useTransform(scrollYProgress, [0, 0.1], [-2, -2]);
+  const card4Rotate = useTransform(scrollYProgress, [0, 0.1], [1.5, 1.5]);
 
   const navyPhotos = [
     { src: '/navy-submarine.jpg', alt: 'Submarine at port' },
-    { src: '/navy-training.jpg', alt: 'Damage control training' },
+    { src: '/navy-portrait.jpg', alt: 'Navy portrait' },
     { src: '/about-navy.jpg', alt: 'Navy service' },
     { src: '/about-welding.png', alt: 'Welding work' },
   ];
@@ -67,7 +67,7 @@ const NavyService = () => {
       period: 'OCT 2019 - SEP 2020',
       rank: 'HT2/NDT',
       recommendation: 'Early Promote',
-      command: 'PSNS Code 135'
+      command: 'USS Frank Cable'
     },
     {
       src: '/navy-evals/eval-5.jpg',
@@ -102,9 +102,9 @@ const NavyService = () => {
     {
       title: 'Hull Maintenance Technician (HT)',
       period: '2013 - 2019',
-      description: 'Specialized in welding, metal fabrication, and damage control aboard nuclear submarines.',
+      description: 'Specialized in welding, metal fabrication, and damage control aboard Subamrine Tenders and nuclear submarines.',
       skills: ['Welding & Fabrication', 'Damage Control', 'Shipboard Preservation'],
-      vessels: ['USS Michigan (SSGN-727)', 'USS Washington'],
+      vessels: ['USS Michigan (SSGN-727)', 'USS Washington', 'USS Frank Cable', 'USS Emory S. Land'],
     },
     {
       title: 'NDT Inspector (Level II)',
@@ -116,7 +116,7 @@ const NavyService = () => {
   ];
 
   const stats = [
-    { value: '8 Years', label: 'Active Duty' },
+    { value: '8 Years', label: 'Service' },
     { value: 'E-5', label: 'Petty Officer 2nd Class' },
     { value: 'Secret', label: 'Clearance' },
   ];
@@ -149,7 +149,7 @@ const NavyService = () => {
 
             <motion.div className="navy-text" style={{ opacity: contentOpacity }}>
               <p className="navy-intro">
-                Eight years of active duty service in the U.S. Navy shaped my discipline,
+                Eight years of service in the U.S. Navy shaped my discipline,
                 technical expertise, and leadership. From welding critical repairs on submarines
                 to conducting precision inspections, I learned that attention to detail isn't
                 optional—it's mission-critical.

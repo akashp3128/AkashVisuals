@@ -2,7 +2,7 @@
   background: var(--bg-primary);
   position: relative;
   min-height: auto;
-  padding: 80px 0;
+  padding: 60px 0;
 }
 
 .about > .container {
@@ -13,8 +13,8 @@
 
 .about-grid {
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 60px;
+  grid-template-columns: 1fr auto;
+  gap: 40px;
   align-items: center;
   width: 100%;
   max-width: var(--max-width);
@@ -129,28 +129,45 @@
 
 .about-images {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  gap: 12px;
-  overflow: visible;
-  position: relative;
+  grid-template-columns: repeat(3, 180px);
+  grid-template-rows: repeat(2, 180px);
+  gap: 10px;
+  justify-content: start;
 }
 
 .about-image {
   overflow: hidden;
-  aspect-ratio: 1;
   border: 3px solid #000;
   box-shadow: 4px 4px 0 #000;
   position: relative;
-  will-change: transform;
-  transform-origin: center center;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+
+.about-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  filter: grayscale(100%) contrast(1.1);
+  transition: filter 0.3s ease;
+}
+
+/* Position each image to show the important part */
+.about-image:nth-child(1) img { object-position: center 25%; }
+.about-image:nth-child(2) img { object-position: center 20%; }
+.about-image:nth-child(3) img { object-position: center 30%; }
+.about-image:nth-child(4) img { object-position: center 50%; }
+.about-image:nth-child(5) img { object-position: center center; }
+.about-image:nth-child(6) img { object-position: center 30%; }
 
 .about-image:hover {
   transform: translate(-2px, -2px);
   box-shadow: 6px 6px 0 #000;
   z-index: 10;
+}
+
+.about-image:hover img {
+  filter: grayscale(0%) contrast(1);
 }
 
 /* Halftone overlay */
@@ -201,7 +218,9 @@
 @media (max-width: 768px) {
   .about-images {
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 12px;
+    padding: 10px;
   }
 
   .about-text {
