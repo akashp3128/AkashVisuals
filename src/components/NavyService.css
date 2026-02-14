@@ -443,9 +443,8 @@
 
 .eval-image-wrapper {
   position: relative;
-  aspect-ratio: 3/4;
+  height: 200px;
   overflow: hidden;
-  max-height: 180px;
 }
 
 .eval-image-wrapper img {
