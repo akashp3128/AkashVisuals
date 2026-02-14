@@ -3,6 +3,8 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import ImageLightbox from './ImageLightbox';
 import './NavyService.css';
 
+const BASE_URL = import.meta.env.BASE_URL;
+
 const NavyService = () => {
   const sectionRef = useRef(null);
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -24,17 +26,17 @@ const NavyService = () => {
   const card4Rotate = useTransform(scrollYProgress, [0, 0.1], [1.5, 1.5]);
 
   const navyPhotos = [
-    { src: '/navy-submarine.jpg', alt: 'Submarine at port' },
-    { src: '/navy-portrait.jpg', alt: 'Navy portrait' },
-    { src: '/about-navy.jpg', alt: 'Navy service' },
-    { src: '/about-welding.png', alt: 'Welding work' },
+    { src: `${BASE_URL}navy-submarine.jpg`, alt: 'Submarine at port' },
+    { src: `${BASE_URL}navy-portrait.jpg`, alt: 'Navy portrait' },
+    { src: `${BASE_URL}about-navy.jpg`, alt: 'Navy service' },
+    { src: `${BASE_URL}about-welding.png`, alt: 'Welding work' },
   ];
 
   const cardRotations = [card1Rotate, card2Rotate, card3Rotate, card4Rotate];
 
   const evalImages = [
     {
-      src: '/navy-evals/eval-1.jpg',
+      src: `${BASE_URL}navy-evals/eval-1.jpg`,
       alt: 'Navy Evaluation 2017',
       caption: 'Performance Evaluation - Early Promote Recommendation',
       period: 'OCT 2016 - SEP 2017',
@@ -43,7 +45,7 @@ const NavyService = () => {
       command: 'USS Michigan (SSGN-727)'
     },
     {
-      src: '/navy-evals/eval-4.jpg',
+      src: `${BASE_URL}navy-evals/eval-4.jpg`,
       alt: 'Navy Evaluation 2018',
       caption: 'Performance Evaluation - Technical Excellence',
       period: 'OCT 2017 - SEP 2018',
@@ -52,7 +54,7 @@ const NavyService = () => {
       command: 'USS Frank Cable (AS-40)'
     },
     {
-      src: '/navy-evals/eval-3.jpg',
+      src: `${BASE_URL}navy-evals/eval-3.jpg`,
       alt: 'Navy Evaluation 2019',
       caption: 'Performance Evaluation - Leadership Recognition',
       period: 'OCT 2018 - SEP 2019',
@@ -61,7 +63,7 @@ const NavyService = () => {
       command: 'USS Washington'
     },
     {
-      src: '/navy-evals/eval-2.jpg',
+      src: `${BASE_URL}navy-evals/eval-2.jpg`,
       alt: 'Navy Evaluation 2020',
       caption: 'Performance Evaluation - Mission Impact',
       period: 'OCT 2019 - SEP 2020',
@@ -70,7 +72,7 @@ const NavyService = () => {
       command: 'NOSC Des Moines - SurgeMain'
     },
     {
-      src: '/navy-evals/eval-5.jpg',
+      src: `${BASE_URL}navy-evals/eval-5.jpg`,
       alt: 'Navy Evaluation NDT 2021',
       caption: 'NDT Inspector Evaluation - Puget Sound Naval Shipyard',
       period: 'OCT 2020 - SEP 2021',

@@ -2,6 +2,8 @@ import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import './About.css';
 
+const BASE_URL = import.meta.env.BASE_URL;
+
 const About = () => {
   const sectionRef = useRef(null);
 
@@ -37,12 +39,12 @@ const About = () => {
 
   // Your personal photos
   const images = [
-    { src: '/about-gym.jpg', alt: 'Fitness' },
-    { src: '/about-iowa-state.jpg', alt: 'Iowa State University' },
-    { src: '/about-chiefs.jpg', alt: 'Chiefs Fan' },
-    { src: '/about-gymnastics.jpg', alt: 'Gymnastics' },
-    { src: '/about-esp.jpg', alt: 'ESP32 Project' },
-    { src: '/about-photo6.jpg', alt: 'Personal' },
+    { src: `${BASE_URL}about-gym.jpg`, alt: 'Fitness' },
+    { src: `${BASE_URL}about-iowa-state.jpg`, alt: 'Iowa State University' },
+    { src: `${BASE_URL}about-chiefs.jpg`, alt: 'Chiefs Fan' },
+    { src: `${BASE_URL}about-gymnastics.jpg`, alt: 'Gymnastics' },
+    { src: `${BASE_URL}about-esp.jpg`, alt: 'ESP32 Project' },
+    { src: `${BASE_URL}about-photo6.jpg`, alt: 'Personal' },
   ];
 
   const cardRotations = [card1Rotate, card2Rotate, card3Rotate, card4Rotate, card5Rotate, card6Rotate];

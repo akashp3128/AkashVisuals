@@ -3,6 +3,8 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import TiltCard from './TiltCard';
 import './FeaturedWorks.css';
 
+const BASE_URL = import.meta.env.BASE_URL;
+
 const FeaturedWorks = () => {
   const sectionRef = useRef(null);
 
@@ -44,7 +46,7 @@ const FeaturedWorks = () => {
       id: 1,
       title: 'RAYCASTING ENGINE',
       category: 'Graphics / C++',
-      image: '/raycasting-engine.png',
+      image: `${BASE_URL}raycasting-engine.png`,
       color: '#8B0000',
       link: 'https://github.com/akashp3128/Raycasting-engine',
     },
@@ -52,7 +54,7 @@ const FeaturedWorks = () => {
       id: 2,
       title: 'FADE',
       category: 'Mobile App / Flutter',
-      image: '/fade-landing.png',
+      image: `${BASE_URL}fade-landing.png`,
       color: '#D4AF37',
       link: 'https://github.com/akashp3128/fade-app',
     },
@@ -60,7 +62,7 @@ const FeaturedWorks = () => {
       id: 3,
       title: 'SPACEX BEAM PLANNER',
       category: 'Algorithms / C++',
-      image: '/spacex-beam.png',
+      image: `${BASE_URL}spacex-beam.png`,
       color: '#00ff00',
       link: 'https://github.com/akashp3128/SpaceX-Beam-Planner',
     },
@@ -68,7 +70,7 @@ const FeaturedWorks = () => {
       id: 4,
       title: 'EJPRINT4U',
       category: 'Freelance / Next.js',
-      image: '/ejprint4u.png',
+      image: `${BASE_URL}ejprint4u.png`,
       color: '#E63946',
       link: 'https://ejprint4u.com',
     },

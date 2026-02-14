@@ -3,6 +3,8 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import LiveTicker from './LiveTicker';
 import './Hero.css';
 
+const BASE_URL = import.meta.env.BASE_URL;
+
 const Hero = () => {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -42,8 +44,8 @@ const Hero = () => {
   const layerOpacity = useTransform(scrollYProgress, [0.55, 0.65], [1, 0]);
 
   // Panel images
-  const leftPanelImage = '/leftpanel.jpg';
-  const rightPanelImage = '/rightpanel.jpg';
+  const leftPanelImage = `${BASE_URL}leftpanel.jpg`;
+  const rightPanelImage = `${BASE_URL}rightpanel.jpg`;
 
 
   return (
@@ -60,7 +62,7 @@ const Hero = () => {
               y: posterY,
             }}
           >
-            <img src="/wanted-poster.png" alt="Akash Patel - Wanted Poster" />
+            <img src={`${BASE_URL}wanted-poster.png`} alt="Akash Patel - Wanted Poster" />
           </motion.div>
 
           {/* Subtitles - fade in after poster shrinks */}
