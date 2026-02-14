@@ -1,9 +1,8 @@
 .featured-works {
   background: var(--bg-primary);
   position: relative;
-  /* Normal section height - no more excessive scrolling */
-  min-height: 100vh;
-  padding: 80px 0;
+  min-height: auto;
+  padding: 50px 0;
 }
 
 .featured-works > .container {
@@ -35,9 +34,9 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 40px;
-  margin-bottom: 40px;
-  padding-bottom: 20px;
+  gap: 32px;
+  margin-bottom: 32px;
+  padding-bottom: 16px;
   border-bottom: 2px solid #000;
   max-width: var(--max-width);
   margin-left: auto;
@@ -205,8 +204,8 @@
 .works-cta {
   display: flex;
   justify-content: center;
-  margin-top: 40px;
-  padding-top: 30px;
+  margin-top: 32px;
+  padding-top: 24px;
   border-top: 2px solid #000;
   max-width: 800px;
   margin-left: auto;
