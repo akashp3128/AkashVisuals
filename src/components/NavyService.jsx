@@ -49,7 +49,7 @@ const NavyService = () => {
       period: 'OCT 2017 - SEP 2018',
       rank: 'HT3',
       recommendation: 'Early Promote',
-      command: 'USS Michigan (SSGN-727)'
+      command: 'USS Frank Cable (AS-40)'
     },
     {
       src: '/navy-evals/eval-3.jpg',
@@ -67,7 +67,7 @@ const NavyService = () => {
       period: 'OCT 2019 - SEP 2020',
       rank: 'HT2',
       recommendation: 'Early Promote',
-      command: 'USS Frank Cable'
+      command: 'Puget Sound Naval Shipyard'
     },
     {
       src: '/navy-evals/eval-5.jpg',
