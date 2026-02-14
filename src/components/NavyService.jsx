@@ -67,7 +67,7 @@ const NavyService = () => {
       period: 'OCT 2019 - SEP 2020',
       rank: 'HT2',
       recommendation: 'Early Promote',
-      command: 'Puget Sound Naval Shipyard'
+      command: 'NOSC Des Moines - SurgeMain'
     },
     {
       src: '/navy-evals/eval-5.jpg',
