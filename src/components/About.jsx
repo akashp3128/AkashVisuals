@@ -39,7 +39,7 @@ const About = () => {
 
   // Your personal photos
   const images = [
-    { src: `${BASE_URL}about-gym.jpg`, alt: 'Fitness' },
+    { src: `${BASE_URL}about-gym.jpg`, alt: 'The Boys' },
     { src: `${BASE_URL}about-iowa-state.jpg`, alt: 'Iowa State University' },
     { src: `${BASE_URL}about-chiefs.jpg`, alt: 'Chiefs Fan' },
     { src: `${BASE_URL}about-gymnastics.jpg`, alt: 'Gymnastics' },

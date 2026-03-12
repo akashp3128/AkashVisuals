@@ -60,11 +60,11 @@ const FeaturedWorks = () => {
     },
     {
       id: 3,
-      title: 'SPACEX BEAM PLANNER',
-      category: 'Algorithms / C++',
-      image: `${BASE_URL}spacex-beam.png`,
-      color: '#00ff00',
-      link: 'https://github.com/akashp3128/SpaceX-Beam-Planner',
+      title: "MCDONALD'S POS",
+      category: 'Full-Stack / C# Avalonia',
+      image: `${BASE_URL}mcdonalds-pos.png`,
+      color: '#FFC72C',
+      link: 'https://github.com/akashp3128/McDonaldsPOS',
     },
     {
       id: 4,

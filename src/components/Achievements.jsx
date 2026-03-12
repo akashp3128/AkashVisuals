@@ -29,6 +29,13 @@ const Achievements = () => {
       category: 'Athletics',
     },
     {
+      stat: '🏆',
+      label: 'Fantasy Football Champ',
+      description: 'League Champion 2017',
+      icon: '🏈',
+      category: 'Sports',
+    },
+    {
       stat: '3x',
       label: 'Early Promote',
       description: 'Highest Navy evaluation rating across multiple commands',
