@@ -15,54 +15,59 @@ const LiveTicker = () => {
   useEffect(() => {
     const fetchAllPrices = async () => {
       const newPrices = { ...prices };
-      let hasData = false;
 
-      // Try Binance API for crypto (has CORS support)
+      // Fetch crypto from CoinGecko (public API with CORS)
       try {
-        const [btcRes, ethRes] = await Promise.all([
-          fetch('https://api.binance.com/api/v3/ticker/24hr?symbol=BTCUSDT'),
-          fetch('https://api.binance.com/api/v3/ticker/24hr?symbol=ETHUSDT'),
-        ]);
+        const cryptoRes = await fetch(
+          'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true',
+          { headers: { 'Accept': 'application/json' } }
+        );
 
-        if (btcRes.ok) {
-          const btcData = await btcRes.json();
-          newPrices.BTC = {
-            price: parseFloat(btcData.lastPrice),
-            change: parseFloat(btcData.priceChangePercent),
-          };
-          hasData = true;
-        }
-
-        if (ethRes.ok) {
-          const ethData = await ethRes.json();
-          newPrices.ETH = {
-            price: parseFloat(ethData.lastPrice),
-            change: parseFloat(ethData.priceChangePercent),
-          };
-          hasData = true;
+        if (cryptoRes.ok) {
+          const data = await cryptoRes.json();
+          if (data.bitcoin) {
+            newPrices.BTC = {
+              price: data.bitcoin.usd,
+              change: data.bitcoin.usd_24h_change || 0,
+            };
+          }
+          if (data.ethereum) {
+            newPrices.ETH = {
+              price: data.ethereum.usd,
+              change: data.ethereum.usd_24h_change || 0,
+            };
+          }
         }
       } catch (err) {
-        console.error('Binance fetch error:', err);
+        console.error('CoinGecko fetch error:', err);
       }
 
-      // Try Twelve Data API for stocks (free tier with CORS)
-      const stockSymbols = ['TSLA', 'SPY', 'GME'];
+      // Fetch stocks using Yahoo Finance via allorigins proxy
+      const stockSymbols = [
+        { symbol: 'SPY', key: 'SPY' },
+        { symbol: 'TSLA', key: 'TSLA' },
+        { symbol: 'GME', key: 'GME' },
+        { symbol: '^DJI', key: 'DOW' },
+      ];
 
-      for (const symbol of stockSymbols) {
+      for (const { symbol, key } of stockSymbols) {
         try {
-          // Use public quote endpoint
-          const res = await fetch(
-            `https://api.twelvedata.com/quote?symbol=${symbol}&apikey=demo`
-          );
+          const yahooUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?interval=1d&range=1d`;
+          const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(yahooUrl)}`;
 
+          const res = await fetch(proxyUrl);
           if (res.ok) {
             const data = await res.json();
-            if (data.close && data.previous_close) {
-              const price = parseFloat(data.close);
-              const prevClose = parseFloat(data.previous_close);
-              const change = ((price - prevClose) / prevClose) * 100;
-              newPrices[symbol] = { price, change };
-              hasData = true;
+            if (data.chart?.result?.[0]) {
+              const meta = data.chart.result[0].meta;
+              const currentPrice = meta.regularMarketPrice;
+              const prevClose = meta.chartPreviousClose || meta.previousClose;
+              const change = prevClose ? ((currentPrice - prevClose) / prevClose) * 100 : 0;
+
+              newPrices[key] = {
+                price: currentPrice,
+                change: change,
+              };
             }
           }
         } catch (err) {
@@ -70,34 +75,13 @@ const LiveTicker = () => {
         }
       }
 
-      // For DOW, use a calculated approximation or skip
-      // Most free APIs don't support indices well
-      if (newPrices.SPY.price > 0) {
-        // Rough DOW estimate based on SPY (not accurate but gives market direction)
-        newPrices.DOW = {
-          price: Math.round(newPrices.SPY.price * 75), // Rough ratio
-          change: newPrices.SPY.change,
-        };
-      }
-
-      // Always use fallback data if APIs fail (CORS blocked on GitHub Pages)
-      if (!hasData) {
-        // Use representative market data as fallback
-        newPrices.BTC = { price: 82450, change: 1.24 };
-        newPrices.ETH = { price: 3180, change: 0.87 };
-        newPrices.GME = { price: 24.50, change: -0.52 };
-        newPrices.SPY = { price: 563.20, change: 0.31 };
-        newPrices.TSLA = { price: 178.45, change: 1.53 };
-        newPrices.DOW = { price: 42150, change: 0.28 };
-      }
-
       setPrices(newPrices);
       setLoading(false);
     };
 
     fetchAllPrices();
-    // Refresh every 60 seconds (less aggressive to avoid rate limits)
-    const interval = setInterval(fetchAllPrices, 60000);
+    // Refresh every 30 seconds
+    const interval = setInterval(fetchAllPrices, 30000);
     return () => clearInterval(interval);
   }, []);
 
