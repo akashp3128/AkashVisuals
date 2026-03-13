@@ -70,10 +70,11 @@ const Achievements = () => {
       featured: true,
     },
     {
-      stat: '7,000%',
+      stat: '2,740%',
       label: 'Trading Returns',
-      description: '$4K → $284K through strategic options trading',
+      description: '$7K → $202K in 3 months through options trading',
       icon: 'chart',
+      image: '/trading-returns.png',
     },
     {
       stat: 'Top 8',
@@ -132,14 +133,20 @@ const Achievements = () => {
           {achievements.map((achievement, index) => (
             <motion.div
               key={index}
-              className={`achievement-card ${achievement.featured ? 'featured' : ''}`}
+              className={`achievement-card ${achievement.featured ? 'featured' : ''} ${achievement.image ? 'has-image' : ''}`}
               initial={{ opacity: 0, y: 30 }}
               animate={isVisible ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.1 + index * 0.05 }}
             >
-              <div className="achievement-icon">
-                {Icons[achievement.icon]}
-              </div>
+              {achievement.image ? (
+                <div className="achievement-image">
+                  <img src={achievement.image} alt={achievement.label} />
+                </div>
+              ) : (
+                <div className="achievement-icon">
+                  {Icons[achievement.icon]}
+                </div>
+              )}
               <div className="achievement-content">
                 <div className="achievement-stat">{achievement.stat}</div>
                 <div className="achievement-label">{achievement.label}</div>
