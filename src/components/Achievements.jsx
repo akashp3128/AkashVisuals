@@ -132,20 +132,14 @@ const Achievements = () => {
           {achievements.map((achievement, index) => (
             <motion.div
               key={index}
-              className={`achievement-card ${achievement.featured ? 'featured' : ''} ${achievement.image ? 'has-image' : ''}`}
+              className={`achievement-card ${achievement.featured ? 'featured' : ''}`}
               initial={{ opacity: 0, y: 30 }}
               animate={isVisible ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.1 + index * 0.05 }}
             >
-              {achievement.image ? (
-                <div className="achievement-image">
-                  <img src={achievement.image} alt={achievement.label} />
-                </div>
-              ) : (
-                <div className="achievement-icon">
-                  {Icons[achievement.icon]}
-                </div>
-              )}
+              <div className="achievement-icon">
+                {Icons[achievement.icon]}
+              </div>
               <div className="achievement-content">
                 <div className="achievement-stat">{achievement.stat}</div>
                 <div className="achievement-label">{achievement.label}</div>

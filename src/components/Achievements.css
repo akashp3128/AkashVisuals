@@ -120,30 +120,6 @@
   color: rgba(255, 255, 255, 0.6);
 }
 
-/* Image for achievements with screenshots */
-.achievement-image {
-  width: 100%;
-  border-radius: 8px;
-  overflow: hidden;
-  margin-bottom: 8px;
-}
-
-.achievement-image img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 8px;
-}
-
-.achievement-card.has-image {
-  padding: 20px;
-}
-
-.achievement-card.has-image .achievement-content {
-  text-align: center;
-  width: 100%;
-}
-
 /* Icon */
 .achievement-icon {
   width: 28px;
