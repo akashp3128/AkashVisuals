@@ -74,7 +74,6 @@ const Achievements = () => {
       label: 'Trading Returns',
       description: '$7K → $202K in 3 months through options trading',
       icon: 'chart',
-      image: '/trading-returns.png',
     },
     {
       stat: 'Top 8',
