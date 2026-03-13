@@ -1,0 +1,8 @@
+{
+  "functions": {
+    "api/stocks.js": {
+      "memory": 128,
+      "maxDuration": 10
+    }
+  }
+}

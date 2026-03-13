@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react';
 import './LiveTicker.css';
 
-// Multiple CORS proxies to try
+// Vercel API endpoint (deploy api/stocks.js to Vercel for reliable data)
+// Set this to your Vercel deployment URL, e.g., 'https://your-app.vercel.app'
+const VERCEL_API_URL = null; // TODO: Set after deploying to Vercel
+
+// Fallback CORS proxies
 const CORS_PROXIES = [
   (url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
   (url) => `https://corsproxy.io/?${encodeURIComponent(url)}`,
@@ -61,7 +65,7 @@ const LiveTicker = () => {
         console.error('CoinGecko error:', err);
       }
 
-      // Fetch stocks from Yahoo Finance via proxy
+      // Fetch stocks
       const stockSymbols = [
         { symbol: 'SPY', key: 'SPY' },
         { symbol: 'TSLA', key: 'TSLA' },
@@ -69,20 +73,41 @@ const LiveTicker = () => {
         { symbol: '^DJI', key: 'DOW' },
       ];
 
-      for (const { symbol, key } of stockSymbols) {
+      // Try Vercel API first (most reliable)
+      if (VERCEL_API_URL) {
         try {
-          const data = await fetchWithProxy(
-            `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?interval=1d&range=1d`
-          );
-          if (data?.chart?.result?.[0]) {
-            const meta = data.chart.result[0].meta;
-            const currentPrice = meta.regularMarketPrice;
-            const prevClose = meta.chartPreviousClose || meta.previousClose || currentPrice;
-            const change = prevClose ? ((currentPrice - prevClose) / prevClose) * 100 : 0;
-            newPrices[key] = { price: currentPrice, change };
+          const symbols = stockSymbols.map(s => s.symbol).join(',');
+          const res = await fetch(`${VERCEL_API_URL}/api/stocks?symbols=${symbols}`);
+          if (res.ok) {
+            const data = await res.json();
+            for (const { symbol, key } of stockSymbols) {
+              if (data[symbol]) {
+                const { price, previousClose } = data[symbol];
+                const change = previousClose ? ((price - previousClose) / previousClose) * 100 : 0;
+                newPrices[key] = { price, change };
+              }
+            }
           }
         } catch (err) {
-          // Silent fail - keep previous value or 0
+          console.error('Vercel API error:', err);
+        }
+      } else {
+        // Fallback to CORS proxies
+        for (const { symbol, key } of stockSymbols) {
+          try {
+            const data = await fetchWithProxy(
+              `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?interval=1d&range=1d`
+            );
+            if (data?.chart?.result?.[0]) {
+              const meta = data.chart.result[0].meta;
+              const currentPrice = meta.regularMarketPrice;
+              const prevClose = meta.chartPreviousClose || meta.previousClose || currentPrice;
+              const change = prevClose ? ((currentPrice - prevClose) / prevClose) * 100 : 0;
+              newPrices[key] = { price: currentPrice, change };
+            }
+          } catch (err) {
+            // Silent fail
+          }
         }
       }
 
