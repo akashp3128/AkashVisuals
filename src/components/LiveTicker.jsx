@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
 import './LiveTicker.css';
 
-// Vercel API endpoint (deploy api/stocks.js to Vercel for reliable data)
-// Set this to your Vercel deployment URL, e.g., 'https://your-app.vercel.app'
-const VERCEL_API_URL = null; // TODO: Set after deploying to Vercel
+// Vercel API endpoint for stock data
+const VERCEL_API_URL = 'https://stock-api-ecru.vercel.app';
 
 // Fallback CORS proxies
 const CORS_PROXIES = [
