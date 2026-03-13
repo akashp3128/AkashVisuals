@@ -5,10 +5,10 @@ const LiveTicker = () => {
   const [prices, setPrices] = useState({
     BTC: { price: 0, change: 0 },
     ETH: { price: 0, change: 0 },
-    GME: { price: 0, change: 0 },
-    SPY: { price: 0, change: 0 },
-    TSLA: { price: 0, change: 0 },
-    DOW: { price: 0, change: 0 },
+    SOL: { price: 0, change: 0 },
+    XRP: { price: 0, change: 0 },
+    DOGE: { price: 0, change: 0 },
+    ADA: { price: 0, change: 0 },
   });
   const [loading, setLoading] = useState(true);
 
@@ -16,15 +16,16 @@ const LiveTicker = () => {
     const fetchAllPrices = async () => {
       const newPrices = { ...prices };
 
-      // Fetch crypto from CoinGecko (public API with CORS)
+      // Fetch crypto from CoinGecko (public API with CORS support)
       try {
         const cryptoRes = await fetch(
-          'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true',
+          'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,ripple,dogecoin,cardano&vs_currencies=usd&include_24hr_change=true',
           { headers: { 'Accept': 'application/json' } }
         );
 
         if (cryptoRes.ok) {
           const data = await cryptoRes.json();
+
           if (data.bitcoin) {
             newPrices.BTC = {
               price: data.bitcoin.usd,
@@ -37,42 +38,33 @@ const LiveTicker = () => {
               change: data.ethereum.usd_24h_change || 0,
             };
           }
+          if (data.solana) {
+            newPrices.SOL = {
+              price: data.solana.usd,
+              change: data.solana.usd_24h_change || 0,
+            };
+          }
+          if (data.ripple) {
+            newPrices.XRP = {
+              price: data.ripple.usd,
+              change: data.ripple.usd_24h_change || 0,
+            };
+          }
+          if (data.dogecoin) {
+            newPrices.DOGE = {
+              price: data.dogecoin.usd,
+              change: data.dogecoin.usd_24h_change || 0,
+            };
+          }
+          if (data.cardano) {
+            newPrices.ADA = {
+              price: data.cardano.usd,
+              change: data.cardano.usd_24h_change || 0,
+            };
+          }
         }
       } catch (err) {
         console.error('CoinGecko fetch error:', err);
-      }
-
-      // Fetch stocks using Yahoo Finance via allorigins proxy
-      const stockSymbols = [
-        { symbol: 'SPY', key: 'SPY' },
-        { symbol: 'TSLA', key: 'TSLA' },
-        { symbol: 'GME', key: 'GME' },
-        { symbol: '^DJI', key: 'DOW' },
-      ];
-
-      for (const { symbol, key } of stockSymbols) {
-        try {
-          const yahooUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?interval=1d&range=1d`;
-          const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(yahooUrl)}`;
-
-          const res = await fetch(proxyUrl);
-          if (res.ok) {
-            const data = await res.json();
-            if (data.chart?.result?.[0]) {
-              const meta = data.chart.result[0].meta;
-              const currentPrice = meta.regularMarketPrice;
-              const prevClose = meta.chartPreviousClose || meta.previousClose;
-              const change = prevClose ? ((currentPrice - prevClose) / prevClose) * 100 : 0;
-
-              newPrices[key] = {
-                price: currentPrice,
-                change: change,
-              };
-            }
-          }
-        } catch (err) {
-          console.error(`Stock fetch error for ${symbol}:`, err);
-        }
       }
 
       setPrices(newPrices);
@@ -87,10 +79,14 @@ const LiveTicker = () => {
 
   const formatPrice = (price, symbol) => {
     if (price === 0) return '---';
-    if (['BTC', 'ETH', 'DOW', 'SPY'].includes(symbol)) {
+    // Format based on price magnitude
+    if (price >= 1000) {
+      return price.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+    } else if (price >= 1) {
       return price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    } else {
+      return price.toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 });
     }
-    return price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   };
 
   const formatChange = (change) => {
@@ -99,7 +95,7 @@ const LiveTicker = () => {
     return `${prefix}${change.toFixed(2)}%`;
   };
 
-  const tickerOrder = ['GME', 'SPY', 'BTC', 'ETH', 'TSLA', 'DOW'];
+  const tickerOrder = ['BTC', 'ETH', 'SOL', 'XRP', 'DOGE', 'ADA'];
 
   // Triple the items for seamless loop
   const tickerItems = [...tickerOrder, ...tickerOrder, ...tickerOrder];
