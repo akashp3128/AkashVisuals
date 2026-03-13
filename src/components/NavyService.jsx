@@ -85,8 +85,8 @@ const NavyService = () => {
   const evalQuotes = [
     {
       quote: "A NATURAL, PROVEN LEADER! Led PRTs for 150 Sailors and established a running group for 35 more—resulting in a 98% passage rate.",
-      source: "Commanding Officer",
-      year: "2020"
+      source: "Division Officer",
+      year: "2018"
     },
     {
       quote: "Meticulous in performing quality inspections. Work conducted was critical to keeping projects on schedule and identifying flaws to be remedied.",
@@ -103,14 +103,14 @@ const NavyService = () => {
   const roles = [
     {
       title: 'Hull Maintenance Technician (HT)',
-      period: '2013 - 2019',
+      period: '2015 - 2023',
       description: 'Specialized in welding, metal fabrication, and damage control aboard Submarine Tenders and nuclear submarines.',
       skills: ['Welding & Fabrication', 'Damage Control', 'Shipboard Preservation'],
       vessels: ['USS Michigan (SSGN-727)', 'USS Washington', 'USS Frank Cable', 'USS Emory S. Land'],
     },
     {
       title: 'NDT Inspector (Level II)',
-      period: '2019 - 2021',
+      period: '2020 - 2023',
       description: 'Conducted Non-Destructive Testing inspections at Puget Sound Naval Shipyard Code 135 Lab.',
       skills: ['Visual Testing', 'Magnetic Particle', 'Dye Penetrant'],
       vessels: ['USS Louisiana', 'USS Michigan', 'USS Bremerton'],
