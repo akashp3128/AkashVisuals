@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './LiveTicker.css';
 
 // Vercel API endpoint for stock data
@@ -142,13 +142,23 @@ const LiveTicker = () => {
   };
 
   const tickerOrder = ['SPY', 'QQQ', 'BTC', 'AAPL', 'NVDA', 'ETH', 'TSLA', 'AMZN', 'GME', 'DOW'];
+  const trackRef = useRef(null);
+
+  // Calculate scroll width for seamless animation
+  useEffect(() => {
+    if (trackRef.current && !loading) {
+      const track = trackRef.current;
+      const singleSetWidth = track.scrollWidth / 3;
+      track.style.setProperty('--scroll-width', `-${singleSetWidth}px`);
+    }
+  }, [loading, prices]);
 
   // Triple the items for seamless loop
   const tickerItems = [...tickerOrder, ...tickerOrder, ...tickerOrder];
 
   return (
     <div className="live-ticker">
-      <div className="ticker-track">
+      <div className="ticker-track" ref={trackRef}>
         {tickerItems.map((symbol, index) => (
           <div key={`${symbol}-${index}`} className="ticker-item">
             <span className="ticker-symbol">{symbol}</span>

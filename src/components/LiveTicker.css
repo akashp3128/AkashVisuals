@@ -8,18 +8,19 @@
 
 .ticker-track {
   display: flex;
-  gap: 30px;
-  animation: ticker-scroll 25s linear infinite;
+  gap: 24px;
+  animation: ticker-scroll 40s linear infinite;
   width: fit-content;
   padding: 0 20px;
+  --scroll-width: -33.333%;
 }
 
 @keyframes ticker-scroll {
   0% {
-    transform: translateX(0%);
+    transform: translateX(0);
   }
   100% {
-    transform: translateX(-33.333%);
+    transform: translateX(var(--scroll-width));
   }
 }
 
