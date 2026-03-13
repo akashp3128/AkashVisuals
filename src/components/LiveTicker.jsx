@@ -14,9 +14,13 @@ const LiveTicker = () => {
   const [prices, setPrices] = useState({
     BTC: { price: 0, change: 0 },
     ETH: { price: 0, change: 0 },
-    GME: { price: 0, change: 0 },
     SPY: { price: 0, change: 0 },
+    QQQ: { price: 0, change: 0 },
+    AAPL: { price: 0, change: 0 },
+    NVDA: { price: 0, change: 0 },
     TSLA: { price: 0, change: 0 },
+    AMZN: { price: 0, change: 0 },
+    GME: { price: 0, change: 0 },
     DOW: { price: 0, change: 0 },
   });
   const [loading, setLoading] = useState(true);
@@ -67,7 +71,11 @@ const LiveTicker = () => {
       // Fetch stocks
       const stockSymbols = [
         { symbol: 'SPY', key: 'SPY' },
+        { symbol: 'QQQ', key: 'QQQ' },
+        { symbol: 'AAPL', key: 'AAPL' },
+        { symbol: 'NVDA', key: 'NVDA' },
         { symbol: 'TSLA', key: 'TSLA' },
+        { symbol: 'AMZN', key: 'AMZN' },
         { symbol: 'GME', key: 'GME' },
         { symbol: '^DJI', key: 'DOW' },
       ];
@@ -133,7 +141,7 @@ const LiveTicker = () => {
     return `${prefix}${change.toFixed(2)}%`;
   };
 
-  const tickerOrder = ['GME', 'SPY', 'BTC', 'ETH', 'TSLA', 'DOW'];
+  const tickerOrder = ['SPY', 'QQQ', 'BTC', 'AAPL', 'NVDA', 'ETH', 'TSLA', 'AMZN', 'GME', 'DOW'];
 
   // Triple the items for seamless loop
   const tickerItems = [...tickerOrder, ...tickerOrder, ...tickerOrder];
