@@ -505,61 +505,139 @@
 }
 
 @media (max-width: 768px) {
+  .navy-service {
+    padding: 30px 0;
+  }
+
+  .navy-service > .container {
+    padding: 0 16px;
+  }
+
+  .navy-grid {
+    gap: 24px;
+  }
+
+  .navy-content {
+    gap: 20px;
+  }
+
   .navy-text {
-    padding: 20px;
-    box-shadow: 4px 4px 0 #000;
+    padding: 16px;
+    box-shadow: 3px 3px 0 #000;
+    border-width: 2px;
+  }
+
+  .navy-text::before {
+    width: 12px;
+    height: 12px;
+    top: -6px;
+    right: -6px;
+  }
+
+  .navy-intro {
+    font-size: 14px;
+    line-height: 1.7;
   }
 
   .navy-images {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, auto);
-    gap: 12px;
-    padding: 10px 5px;
+    gap: 10px;
+    padding: 0;
   }
 
   .navy-image {
     box-shadow: 3px 3px 0 #000;
     border-width: 2px;
+    aspect-ratio: 1;
   }
 
   .navy-stats {
-    gap: 12px;
+    gap: 10px;
   }
 
   .stat-item {
-    padding: 12px 16px;
+    padding: 10px 14px;
     box-shadow: 3px 3px 0 #000;
+    border-width: 2px;
+    flex: 1;
+    min-width: 80px;
   }
 
   .stat-value {
-    font-size: 16px;
+    font-size: 14px;
   }
 
   .stat-label {
-    font-size: 10px;
+    font-size: 9px;
+    letter-spacing: 1px;
+  }
+
+  .navy-roles {
+    gap: 10px;
   }
 
   .role-card {
-    padding: 16px;
+    padding: 12px;
     box-shadow: 3px 3px 0 #000;
+    border-width: 2px;
   }
 
   .role-card h4 {
-    font-size: 16px;
+    font-size: 14px;
   }
 
-  .eval-highlights {
-    gap: 12px;
+  .role-period {
+    font-size: 11px;
   }
 
-  .eval-highlight {
-    padding: 10px 16px;
+  .role-card p {
     font-size: 12px;
   }
 
+  .role-skills {
+    gap: 4px;
+  }
+
+  .skill-tag {
+    font-size: 9px;
+    padding: 2px 6px;
+  }
+
+  /* Evaluations section */
+  .navy-evals {
+    margin-top: 24px;
+    padding-top: 24px;
+  }
+
+  .navy-evals h3 {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+
+  .evals-subtitle {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  .eval-highlights {
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .eval-highlight {
+    padding: 8px 12px;
+    font-size: 11px;
+  }
+
+  .highlight-icon {
+    font-size: 14px;
+  }
+
   .evals-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    overflow-x: visible;
   }
 
   .eval-card {
@@ -567,40 +645,156 @@
     border-width: 2px;
   }
 
+  .eval-image-wrapper {
+    height: 140px;
+  }
+
   .eval-quotes {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 12px;
   }
 
   .eval-quote {
-    padding: 20px;
+    padding: 16px;
     box-shadow: 3px 3px 0 #000;
+    border-width: 2px;
+  }
+
+  .eval-quote::before {
+    font-size: 36px;
+    top: 8px;
+    left: 12px;
   }
 
   .eval-quote p {
-    font-size: 14px;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .eval-quote cite {
+    font-size: 11px;
   }
 
   .eval-card-header {
-    padding: 10px 12px;
+    padding: 8px 10px;
+  }
+
+  .eval-badge {
+    font-size: 10px;
+    padding: 3px 8px;
+  }
+
+  .eval-rank {
+    font-size: 11px;
   }
 
   .eval-card-footer {
-    padding: 10px 12px;
+    padding: 8px 10px;
+  }
+
+  .eval-period {
+    font-size: 11px;
+  }
+
+  .eval-command {
+    font-size: 11px;
   }
 }
 
 @media (max-width: 480px) {
+  .navy-service {
+    padding: 24px 0;
+  }
+
+  .navy-service > .container {
+    padding: 0 12px;
+  }
+
+  .navy-content h2 {
+    font-size: 32px;
+  }
+
+  .navy-content h2::after {
+    height: 3px;
+    bottom: -6px;
+  }
+
   .navy-images {
     grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .navy-image {
+    box-shadow: 2px 2px 0 #000;
+  }
+
+  .navy-stats {
+    gap: 8px;
+    justify-content: flex-start;
+  }
+
+  .stat-item {
+    padding: 8px 12px;
+    box-shadow: 2px 2px 0 #000;
+    min-width: 70px;
+  }
+
+  .stat-value {
+    font-size: 13px;
+  }
+
+  .stat-label {
+    font-size: 8px;
   }
 
   .role-header {
     flex-direction: column;
+    align-items: flex-start;
     gap: 4px;
+  }
+
+  .role-card {
+    padding: 10px;
+    box-shadow: 2px 2px 0 #000;
+  }
+
+  .role-card h4 {
+    font-size: 13px;
+  }
+
+  .navy-evals h3 {
+    font-size: 24px;
+  }
+
+  .evals-subtitle {
+    font-size: 13px;
+  }
+
+  .eval-highlights {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .eval-highlight {
+    width: 100%;
+    justify-content: center;
   }
 
   .evals-grid {
     grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .eval-image-wrapper {
+    height: 160px;
+  }
+
+  .eval-card {
+    box-shadow: 2px 2px 0 #000;
+  }
+
+  .eval-quote {
+    padding: 14px;
+    box-shadow: 2px 2px 0 #000;
   }
 }

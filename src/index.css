@@ -6,6 +6,37 @@
   box-sizing: border-box;
 }
 
+/* Mobile viewport handling */
+html {
+  /* Prevent horizontal scroll */
+  overflow-x: hidden;
+  /* Support for safe areas (notches, home indicators) */
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+/* Prevent text size adjust on orientation change */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Improve touch experience */
+@media (hover: none) and (pointer: coarse) {
+  /* Touch devices */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Ensure minimum touch target size */
+  button,
+  a,
+  input,
+  textarea,
+  select {
+    touch-action: manipulation;
+  }
+}
+
 :root {
   /* Manga Theme - High Contrast B&W */
   --bg-primary: #ffffff;
@@ -398,7 +429,7 @@ p {
 
 @media (max-width: 768px) {
   section {
-    padding: 60px 0;
+    padding: 50px 0;
   }
 
   .container {
@@ -408,5 +439,72 @@ p {
   .btn {
     padding: 12px 20px;
     font-size: 13px;
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Better touch targets */
+  a, button {
+    min-height: 44px;
+  }
+
+  /* Reduce decorative shadows on mobile */
+  .manga-panel {
+    box-shadow: 3px 3px 0 #000;
+    border-width: 3px;
+  }
+
+  /* Lighter background texture for performance */
+  body {
+    background-size: 300px;
+  }
+
+  h1 {
+    font-size: clamp(40px, 10vw, 80px);
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+  }
+
+  h2 {
+    font-size: clamp(28px, 5vw, 48px);
+  }
+
+  /* Scrollbar - thinner on mobile */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  section {
+    padding: 40px 0;
+  }
+
+  .container {
+    padding: 0 12px;
+  }
+
+  .btn {
+    padding: 10px 16px;
+    font-size: 12px;
+    box-shadow: 3px 3px 0 #000;
+    border-width: 2px;
+  }
+
+  .manga-panel {
+    box-shadow: 2px 2px 0 #000;
+    border-width: 2px;
+  }
+
+  h1 {
+    font-size: clamp(32px, 9vw, 60px);
+    letter-spacing: 2px;
+  }
+
+  h2 {
+    font-size: clamp(24px, 6vw, 36px);
+  }
+
+  h3 {
+    font-size: clamp(16px, 4vw, 22px);
   }
 }
