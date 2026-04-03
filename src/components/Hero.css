@@ -60,6 +60,7 @@
   overflow: visible;
   position: relative;
   z-index: 1;
+  width: 100%;
 }
 
 /* Speed lines effect behind name */
@@ -198,6 +199,7 @@
   border-top: 3px solid #000;
   border-bottom: 3px solid #000;
   position: relative;
+  overflow: hidden;
 }
 
 .hero-clients::before,
