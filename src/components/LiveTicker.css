@@ -72,3 +72,59 @@
 .live-ticker:hover .ticker-track {
   animation-play-state: paused;
 }
+
+/* Mobile Optimization */
+@media (max-width: 768px) {
+  .ticker-track {
+    gap: 16px;
+    animation-duration: 30s;
+  }
+
+  .ticker-item {
+    padding: 8px 14px;
+    gap: 8px;
+    box-shadow: 2px 2px 0 #000;
+  }
+
+  .ticker-symbol {
+    font-size: 11px;
+    min-width: 32px;
+  }
+
+  .ticker-price {
+    font-size: 11px;
+  }
+
+  .ticker-change {
+    font-size: 10px;
+    padding: 2px 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ticker-track {
+    gap: 12px;
+    animation-duration: 25s;
+  }
+
+  .ticker-item {
+    padding: 6px 10px;
+    gap: 6px;
+    border-width: 1.5px;
+  }
+
+  .ticker-symbol {
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    min-width: 28px;
+  }
+
+  .ticker-price {
+    font-size: 10px;
+  }
+
+  .ticker-change {
+    font-size: 9px;
+    padding: 2px 5px;
+  }
+}

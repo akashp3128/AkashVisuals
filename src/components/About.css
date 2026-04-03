@@ -216,44 +216,128 @@
 }
 
 @media (max-width: 768px) {
+  .about {
+    padding: 30px 0;
+  }
+
+  .about > .container {
+    padding: 0 16px;
+    padding-top: 60px;
+  }
+
+  .about-grid {
+    gap: 24px;
+  }
+
+  .about-content {
+    gap: 20px;
+  }
+
+  .about-content h2::after {
+    height: 3px;
+    bottom: -6px;
+  }
+
   .about-images {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, auto);
-    gap: 12px;
-    padding: 10px;
+    gap: 8px;
+    padding: 0;
   }
 
   .about-text {
-    padding: 20px;
-    box-shadow: 4px 4px 0 #000;
+    padding: 16px;
+    box-shadow: 3px 3px 0 #000;
+    border-width: 2px;
+  }
+
+  .about-text::before {
+    width: 12px;
+    height: 12px;
+    top: -6px;
+    right: -6px;
+  }
+
+  .about-text p {
+    font-size: 14px;
+    line-height: 1.7;
   }
 
   .about-image {
     box-shadow: 3px 3px 0 #000;
     border-width: 2px;
+    aspect-ratio: 1;
+  }
+
+  .about-stats {
+    gap: 8px;
+  }
+
+  .stat-item {
+    padding: 8px 12px;
+    font-size: 11px;
+    box-shadow: 2px 2px 0 #000;
   }
 
   .about-highlights {
-    gap: 12px;
+    gap: 8px;
   }
 
   .highlight-item {
-    padding: 12px 16px;
+    padding: 10px 14px;
     box-shadow: 3px 3px 0 #000;
+    border-width: 2px;
   }
 
   .highlight-value {
-    font-size: 16px;
+    font-size: 14px;
   }
 
   .highlight-label {
-    font-size: 10px;
+    font-size: 9px;
+    letter-spacing: 1px;
   }
 }
 
 @media (max-width: 480px) {
+  .about {
+    padding: 24px 0;
+  }
+
+  .about > .container {
+    padding: 0 12px;
+    padding-top: 50px;
+  }
+
+  .about-content h2 {
+    font-size: 32px;
+  }
+
   .about-images {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(3, 1fr);
+    gap: 6px;
+  }
+
+  .about-image {
+    box-shadow: 2px 2px 0 #000;
+  }
+
+  .about-text {
+    padding: 14px;
+    box-shadow: 2px 2px 0 #000;
+  }
+
+  .about-text p {
+    font-size: 13px;
+  }
+
+  .highlight-item {
+    padding: 8px 12px;
+    box-shadow: 2px 2px 0 #000;
+  }
+
+  .highlight-value {
+    font-size: 13px;
   }
 }
