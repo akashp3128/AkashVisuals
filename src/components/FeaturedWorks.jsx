@@ -68,11 +68,11 @@ const FeaturedWorks = () => {
     },
     {
       id: 4,
-      title: 'EJPRINT4U',
-      category: 'Freelance / Next.js',
-      image: `${BASE_URL}ejprint4u.png`,
-      color: '#E63946',
-      link: 'https://ejprint4u.com',
+      title: 'FARMHOOD FANTASY',
+      category: 'Web App / Vanilla JS',
+      image: `${BASE_URL}farmhood-fantasy.png`,
+      color: '#1E5A38',
+      link: 'https://github.com/akashp3128/farmhood-fantasy',
     },
   ];
 
