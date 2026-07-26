@@ -72,7 +72,7 @@ const FeaturedWorks = () => {
       category: 'Web App / Vanilla JS',
       image: `${BASE_URL}farmhood-fantasy.png`,
       color: '#1E5A38',
-      link: 'https://github.com/akashp3128/farmhood-fantasy',
+      link: 'https://akashp3128.github.io/farmhood-fantasy/',
     },
   ];
 
